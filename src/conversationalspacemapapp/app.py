@@ -7,6 +7,7 @@ from toga.style import Pack
 from toga.constants import COLUMN
 import toga_chart
 import pathlib
+import platform
 
 import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
@@ -92,7 +93,9 @@ class ConversationalSpaceMapApp(toga.App):
         )
         description.style.padding = 5
         description.style.flex = 1
-        description.style.background_color = "transparent"
+
+        if platform.platform() == "Darwin":
+            description.style.background_color = "transparent"
 
         about = toga.Box(
             children=[description],
@@ -103,7 +106,8 @@ class ConversationalSpaceMapApp(toga.App):
             content=[("Home", main), ("About", about)]
         )
         container.style.padding = 5
-        container.style.background_color = "transparent"
+        if platform.platform() == "Darwin":
+            container.style.background_color = "transparent"
 
         self.main_window = toga.MainWindow()
         self.main_window.content = container
