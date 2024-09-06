@@ -1,0 +1,11 @@
+audio_duration: 32
+compute_type: int8
+device: CPU
+file_id: 2024-06-05 18-44-27 240604_0039.MP3
+filename: 240604_0039.MP3
+language: de
+model: large-v2
+num_speakers: '2'
+processing_time: 656
+speaker_detection: true
+timestamp: 2024-06-05 18-44-27
