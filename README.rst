@@ -8,7 +8,7 @@ Generate conversational space maps for interview data.
 Quickstart
 ============================
 
-Note: This quickstart assumes that you have already installed Python.
+Note: This quickstart assumes that you have already installed Python and Git.
 
 1. Download or clone the repository
 
@@ -29,3 +29,9 @@ Note: This quickstart assumes that you have already installed Python.
 .. code-block:: bash
 
     $ briefcase run
+
+(5. Package the app for local installation)
+
+.. code-block:: bash
+
+    $ briefcase package
