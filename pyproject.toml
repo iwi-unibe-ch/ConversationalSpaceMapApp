@@ -3,7 +3,7 @@
 project_name = "Conversational Space Map App"
 bundle = "ch.manuelbieri"
 version = "0.0.1"
-url = "https://manuelbieri.ch/conversationalspacemapapp"
+url = "https://github.com/manuelbieri/ConversationalSpaceMap"
 license.file = "LICENSE"
 author = "Manuel Bieri"
 author_email = "mail@manuelbieri.ch"
