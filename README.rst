@@ -2,7 +2,7 @@ Conversational Space Map App
 ****************************
 
 
-Generate conversational space maps for interview data.
+Generate conversational space maps for interview data, inspired by Saunders et al. (2023, pp. 458-460).
 
 
 Quickstart
@@ -35,3 +35,7 @@ Note: This quickstart assumes that you have already installed Python and Git.
 .. code-block:: bash
 
     $ briefcase package
+
+References
+============================
+**Saunders, Mark, Philip Lewis, and Adrian Thornhill**, *Research methods for business students*, 9 ed., Harlow, England: Pearson, 2023.
