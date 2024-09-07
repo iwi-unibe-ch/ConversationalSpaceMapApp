@@ -94,7 +94,7 @@ class ConversationalSpaceMapApp(toga.App):
         description.style.padding = 5
         description.style.flex = 1
 
-        if platform.platform() == "Darwin":
+        if "macOS" in platform.platform():
             description.style.background_color = "transparent"
 
         about = toga.Box(
@@ -106,7 +106,7 @@ class ConversationalSpaceMapApp(toga.App):
             content=[("Home", main), ("About", about)]
         )
         container.style.padding = 5
-        if platform.platform() == "Darwin":
+        if "macOS" in platform.platform():
             container.style.background_color = "transparent"
 
         self.main_window = toga.MainWindow()
