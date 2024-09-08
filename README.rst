@@ -7,6 +7,7 @@ Generate conversational space maps for interview data, inspired by Saunders et a
 .. image:: src/conversationalspacemapapp/resources/Screenshot.png
    :width: 600
    :alt: App screenshot
+   :align: center
 
 Quickstart
 ============================
@@ -38,6 +39,14 @@ Note: This quickstart assumes that you have already installed Python and Git.
 .. code-block:: bash
 
     $ briefcase package
+
+How to use
+============================
+
+.. image:: src/conversationalspacemapapp/resources/Menubar.png
+   :width: 600
+   :align: center
+   :alt: Menubar screenshot
 
 References
 ============================
