@@ -4,6 +4,9 @@ Conversational Space Map App
 
 Generate conversational space maps for interview data, inspired by Saunders et al. (2023, pp. 458-460).
 
+.. image:: src/conversationalspacemapapp/resources/Screenshot.png
+   :width: 600
+   :alt: App screenshot
 
 Quickstart
 ============================
