@@ -206,7 +206,7 @@ class ConversationalSpaceMapApp(toga.App):
         if file_path.is_file():
             return file_path.read_text()
         else:
-            return "No about page available at " + file_path.as_posix()
+            return "No about page available"
 
 
 def main():
