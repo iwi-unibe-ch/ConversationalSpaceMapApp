@@ -28,7 +28,7 @@ Note: This quickstart assumes that you have already installed Python and Git.
 
     $ pip install .
 
-4. Run the app.
+4. Run the app (`see this tutorial <https://docs.beeware.org/en/latest/tutorial/tutorial-3.html#building-your-application>`_).
 
 .. code-block:: bash
 
