@@ -12,7 +12,7 @@ Generate conversational space maps for interview data, inspired by Saunders et a
 Quickstart
 ============================
 
-Note: This quickstart assumes that you have already installed Python and Git.
+Note: This quickstart guide assumes that you have already installed Python and Git.
 
 1. Download or clone the repository
 
