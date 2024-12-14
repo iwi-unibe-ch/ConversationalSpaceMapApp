@@ -12,6 +12,27 @@ Generate conversational space maps for interview data, inspired by Saunders et a
 Quickstart
 ============================
 
+Installation - PyPi
+----------------------------
+
+Note: This quickstart guide assumes that you have already installed Python.
+
+1. Install via terminal
+
+.. code-block:: bash
+
+    $ pip install ConversationalSpaceMapApp
+
+2. Run the app in the terminal.
+
+.. code-block:: bash
+
+    $ csm-run
+
+
+Installation - GitHub (with packaging)
+----------------------------
+
 Note: This quickstart guide assumes that you have already installed Python and Git.
 
 1. Download or clone the repository
