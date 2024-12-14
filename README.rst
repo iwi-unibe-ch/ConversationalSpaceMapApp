@@ -43,7 +43,7 @@ Note: This quickstart guide assumes that you have already installed Python and G
 How to use
 ============================
 
-.. image:: src/conversationalspacemapapp/resources/Menubar.png
+.. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/master/src/conversationalspacemapapp/resources/Menubar.png
    :width: 600
    :align: center
    :alt: Menubar screenshot
