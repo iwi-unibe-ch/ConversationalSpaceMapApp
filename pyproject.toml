@@ -1,8 +1,48 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Conversational Space Map App"
+dynamic = ["version"]
+dependencies = [
+  "toga-chart",
+  "toga",
+  "mockito",
+]
+requires-python = ">= 3.12"
+authors = [
+  {name = "Manuel Bieri", email = "mail@manuelbieri.ch"}
+]
+maintainers = [
+  {name = "Manuel Bieri", email = "mail@manuelbieri.ch"}
+]
+description = "Generate conversational space maps for interview data."
+readme = "README.rst"
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 4 - Beta",
+  # Pick your license as you wish (see also "license" above)
+  "License :: OSI Approved :: BSD-3-Clause license",
+  # Specify the Python versions you support here.
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://github.com/manuelbieri/ConversationalSpaceMap"
+Documentation = "https://github.com/manuelbieri/ConversationalSpaceMap"
+Repository = "https://github.com/manuelbieri/ConversationalSpaceMapApp.git"
+
 # This project was generated with 0.3.19 using template: https://github.com/beeware/briefcase-template@v0.3.19
 [tool.briefcase]
 project_name = "Conversational Space Map App"
 bundle = "ch.manuelbieri"
-version = "0.0.1"
+version = "0.0.2"
 url = "https://github.com/manuelbieri/ConversationalSpaceMap"
 license.file = "LICENSE"
 author = "Manuel Bieri"
