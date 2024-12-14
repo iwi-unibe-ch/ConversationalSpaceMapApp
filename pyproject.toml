@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Conversational Space Map App"
-version = 0.0.2 # RELEASE
+version = "0.0.2" # RELEASE
 dependencies = [  # RELEASE
   "toga-chart",
   "toga",
