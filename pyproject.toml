@@ -32,6 +32,9 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
 ]
 
+[project.gui-scripts]
+csm-run = "conversationalspacemapapp:run"
+
 [project.urls]
 Homepage = "https://github.com/manuelbieri/ConversationalSpaceMap"
 Documentation = "https://github.com/manuelbieri/ConversationalSpaceMap"
