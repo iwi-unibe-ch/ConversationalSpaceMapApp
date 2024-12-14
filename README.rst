@@ -31,7 +31,7 @@ Note: This quickstart guide assumes that you have already installed Python.
 
 
 Installation - GitHub (with packaging)
-----------------------------
+----------------------------------------
 
 Note: This quickstart guide assumes that you have already installed Python and Git.
 
