@@ -1,7 +1,7 @@
 Conversational Space Map App
 ****************************
 
-|PyPI version| |PyPI status| |PyPI license| |PyPI pyversions|
+|PyPI version| |PyPI status| |PyPI license| |PyPI pyversions| |CI|
 
 
 .. |PyPI status| image:: https://img.shields.io/pypi/status/ConversationalSpaceMapApp
@@ -12,7 +12,8 @@ Conversational Space Map App
    :alt: PyPI - License
 .. |PyPI pyversions| image:: https://img.shields.io/pypi/pyversions/ConversationalSpaceMapApp.svg
    :target: https://pypi.python.org/pypi/ConversationalSpaceMapApp/
-
+.. |CI| image:: https://codecov.io/gh/manuelbieri/ConversationalSpaceMapApp/graph/badge.svg?token=VD3LEELSOB 
+ :target: https://codecov.io/gh/manuelbieri/ConversationalSpaceMapApp
 
 Generate conversational space maps for interview data, inspired by Saunders et al. (2023, pp. 458-460).
 
