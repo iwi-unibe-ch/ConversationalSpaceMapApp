@@ -22,6 +22,7 @@ jobs:
       - name: Run tests
         run: |
           pip install coverage
+          cd tests
           coverage run -m unittest discover tests "test_*.py"
           coverage xml
 
