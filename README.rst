@@ -17,7 +17,7 @@ Conversational Space Map App
 Generate conversational space maps for interview data, inspired by Saunders et al. (2023, pp. 458-460).
 
 .. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/master/src/conversationalspacemapapp/resources/Screenshot.png
-   :width: 90%
+   :width: 95%
    :alt: App screenshot
    :align: center
 
@@ -77,7 +77,7 @@ How to use
 ============================
 
 .. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/master/src/conversationalspacemapapp/resources/Menubar.png
-   :width: 90%
+   :width: 95%
    :align: center
    :alt: Menubar screenshot
 
