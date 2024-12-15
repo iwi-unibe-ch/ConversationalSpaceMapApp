@@ -1,0 +1,5 @@
+toga==0.4.6
+matplotlib==3.9.2
+icnsutil==1.1.0
+mockito
+toga-chart
