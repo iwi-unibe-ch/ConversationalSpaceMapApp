@@ -1,6 +1,6 @@
 name: CodeCov
 
-on: [push, pull_request]
+on: [commit, push, pull_request]
 
 jobs:
   run:
