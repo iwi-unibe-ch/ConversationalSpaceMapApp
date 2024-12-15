@@ -1,4 +1,3 @@
 toga
 mockito
 toga-chart
-pygobject
