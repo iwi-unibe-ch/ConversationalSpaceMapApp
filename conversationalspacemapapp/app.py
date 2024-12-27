@@ -202,7 +202,7 @@ class ConversationalSpaceMapApp(toga.App):
             return []
 
     def _load_about_content(self):
-        file_path = pathlib.Path(__file__).parent / "resources" / "about.html"
+        file_path = pathlib.Path(__file__).parent / "resources" / "index.html"
         if file_path.is_file():
             return file_path.read_text()
         else:
