@@ -86,11 +86,7 @@ class ConversationalSpaceMapApp(toga.App):
             ],
             style=Pack(direction=COLUMN),
         )
-        description = toga.WebView()
-        description.set_content(
-            root_url="",
-            content=self._load_about_content()
-        )
+        description = toga.WebView(url="https://manuelbieri.ch/ConversationalSpaceMapApp/")
         description.style.padding = 5
         description.style.flex = 1
 
@@ -200,13 +196,6 @@ class ConversationalSpaceMapApp(toga.App):
                 return output
         else:
             return []
-
-    def _load_about_content(self):
-        file_path = pathlib.Path(__file__).parent / "resources" / "index.html"
-        if file_path.is_file():
-            return file_path.read_text()
-        else:
-            return "No about page available"
 
 
 def main():

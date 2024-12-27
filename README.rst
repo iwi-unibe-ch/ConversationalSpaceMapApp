@@ -17,7 +17,7 @@ Conversational Space Map App
 
 Generate conversational space maps for interview data, inspired by Saunders et al. (2023, pp. 458-460).
 
-.. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/refs/heads/master/conversationalspacemapapp/resources/Screenshot.png
+.. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/refs/heads/master/docs/images/Screenshot.png
    :width: 95%
    :alt: App screenshot
    :align: center
@@ -77,7 +77,7 @@ Note: This quickstart guide assumes that you have already installed Python and G
 How to use
 ============================
 
-.. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/refs/heads/master/conversationalspacemapapp/resources/Menubar.png
+.. image:: https://raw.githubusercontent.com/manuelbieri/ConversationalSpaceMapApp/refs/heads/master/docs/images/Menubar.png
    :width: 95%
    :align: center
    :alt: Menubar screenshot
