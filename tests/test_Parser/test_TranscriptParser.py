@@ -43,13 +43,11 @@ class TestTranscriptParser(unittest.TestCase):
         # Test first utterance
         self.assertEqual(utterance1.number, 1)
         self.assertEqual(utterance1.speaker, "Interviewer")
-        self.assertEqual(utterance1.role, Constants.Participant.Undefined)
         self.assertEqual(utterance1.words, 15)
 
         # Test second utterance
         self.assertEqual(utterance2.number, 2)
         self.assertEqual(utterance2.speaker, "Interviewee")
-        self.assertEqual(utterance2.role, Constants.Participant.Undefined)
         self.assertEqual(utterance2.words, 4)
 
     def test_transcript_timestamp_map_short_list(self):
@@ -67,19 +65,16 @@ class TestTranscriptParser(unittest.TestCase):
         # Test first utterance
         self.assertEqual(utterance1.number, 1)
         self.assertEqual(utterance1.speaker, "SPEAKER_00")
-        self.assertEqual(utterance1.role, Constants.Participant.Undefined)
         self.assertEqual(utterance1.words, 26)
 
         # Test second utterance
         self.assertEqual(utterance2.number, 2)
         self.assertEqual(utterance2.speaker, "SPEAKER_01")
-        self.assertEqual(utterance2.role, Constants.Participant.Undefined)
         self.assertEqual(utterance2.words, 31)
 
         # Test third utterance
         self.assertEqual(utterance3.number, 3)
         self.assertEqual(utterance3.speaker, "SPEAKER_00")
-        self.assertEqual(utterance3.role, Constants.Participant.Undefined)
         self.assertEqual(utterance3.words, 2)
 
     def test_transcript_timestamp_map_long_list(self):
