@@ -1,26 +1,36 @@
 import matplotlib.pyplot as plt
+import toga
 import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
 
-
 class MapBarPlot:
-    def __init__(self, parser: TranscriptParser.AbstractParser, fig: plt.figure, ax: plt.Axes):
-        self.parser = parser
+    COLORS: list[str] = ["salmon", "gold", "lawngreen", "turquoise", "thistle"]
+
+    def __init__(
+            self,
+            parser: TranscriptParser.AbstractParser,
+            fig: plt.figure,
+            ax: plt.Axes,
+            app: toga.App
+    ):
+        self.participants =  parser.participants
+        self.map = parser.map
         self.ax = ax
         self.fig = fig
+        self.app = app
 
-    def _flip(self, flip_roles=False):
-        if flip_roles:
-            return [ -i for i in self.parser.map_list]
-        else:
-            return self.parser.map_list
-
-    def plot(self, title: str, flip_roles=False):
-        words: list[int] = self._flip(flip_roles=flip_roles)
-        index = [*range(1, len(words) + 1)]
-        self.ax.barh(index, words, align='center', height=0.8)
+    def plot(self, title: str):
+        xlim_num = 0
+        for utterance in self.map:
+            self.ax.barh(
+                utterance.number, utterance.words * self.app.get_participant_role(utterance.speaker).constant,
+                align='center',
+                height=0.8,
+                color=self.app.get_participant_color(utterance.speaker)
+            )
+            xlim_num = max([abs(utterance.words) for utterance in self.map]) * 1.1
+        index = [*range(1, len(self.map) + 1)]
 
         # Set x-axis
-        xlim_num = max([abs(number) for number in words])*1.1
         self.ax.set_xlim([-xlim_num, xlim_num])
         self.ax.xaxis.grid(True, linestyle='--', which='major', color='grey', alpha=.25)
 

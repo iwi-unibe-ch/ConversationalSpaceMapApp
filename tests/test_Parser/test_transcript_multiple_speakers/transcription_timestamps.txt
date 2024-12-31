@@ -11,5 +11,5 @@ SPEAKER_01
 [00:00:22] - Jetzt noch etwas nuscheln.
 [00:00:24] - Ich meine, noch nicht so, kann ich so, ich weiss nicht.
 
-SPEAKER_00
+SPEAKER_02
 [00:00:27] - Deine Mutter.
