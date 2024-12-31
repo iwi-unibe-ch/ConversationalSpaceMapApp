@@ -16,10 +16,6 @@ class AbstractParser(abc.ABC):
         self._map: [Data.Utterance] = self._convert_text()
 
     @property
-    def file(self) -> pathlib.Path:
-        return self._file
-
-    @property
     def map(self) -> [Data.Utterance]:
         return sorted(self._map)
 
