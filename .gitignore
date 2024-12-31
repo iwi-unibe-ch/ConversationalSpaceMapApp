@@ -1,4 +1,1 @@
-
-/conversationalspacemapapp/__pycache__
-/conversationalspacemapapp/Parser/__pycache__
-/conversationalspacemapapp/Plotter/__pycache__
+*.pyc
