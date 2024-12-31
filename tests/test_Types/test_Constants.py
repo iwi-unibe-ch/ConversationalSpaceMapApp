@@ -26,15 +26,27 @@ class TestCustomConstants(unittest.TestCase):
             Constants.Participant.Interviewer.name,
             'Interviewer'
         )
+        self.assertEqual(
+            str(Constants.Participant.Interviewer),
+            'Interviewer'
+        )
 
     def test_interviewee_name(self):
         self.assertEqual(
             Constants.Participant.Interviewee.name,
             'Interviewee'
         )
+        self.assertEqual(
+            str(Constants.Participant.Interviewee),
+            'Interviewee'
+        )
 
     def test_undefined_name(self):
         self.assertEqual(
             Constants.Participant.Undefined.name,
+            'Undefined'
+        )
+        self.assertEqual(
+            str(Constants.Participant.Undefined),
             'Undefined'
         )
