@@ -229,7 +229,11 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
 
     def _set_path(self, path: pathlib.Path):
         assert path.is_file()
-        self.path_input.value = path
+        try:
+            self.path_input.value = path
+        except ValueError:
+            self.path_input.items.append(path)
+            self.path_input.value = path
         self.plot_title = self.path.stem
         self._set_parser()
 
