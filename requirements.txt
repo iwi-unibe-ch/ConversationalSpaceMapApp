@@ -1,3 +1,5 @@
 toga
 mockito
 toga-chart
+briefcase
+pyqt6
