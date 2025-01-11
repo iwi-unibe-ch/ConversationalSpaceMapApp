@@ -25,7 +25,7 @@ class ConversationalSpaceMapApp(toga.App):
 
     @property
     def _has_parser(self):
-        return self.path_input is not None
+        return self.parser is not None
 
     def startup(self):
         self.parser: TranscriptParser.AbstractParser = None

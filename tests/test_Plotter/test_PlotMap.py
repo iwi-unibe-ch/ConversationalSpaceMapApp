@@ -30,10 +30,10 @@ class TestPlotMap(unittest.TestCase):
             )
         ]
         TestPlotMap.app = MagicMock()
-        when(TestPlotMap.app).get_participant_role('SPEAKER_00').thenReturn(Constants.Participant.Interviewer)
-        when(TestPlotMap.app).get_participant_role('SPEAKER_01').thenReturn(Constants.Participant.Interviewee)
-        when(TestPlotMap.app).get_participant_color('SPEAKER_00').thenReturn(PlotMap.MapBarPlot.COLORS[0])
-        when(TestPlotMap.app).get_participant_color('SPEAKER_01').thenReturn(PlotMap.MapBarPlot.COLORS[1])
+        when(TestPlotMap.app)._get_participant_role('SPEAKER_00').thenReturn(Constants.Participant.Interviewer)
+        when(TestPlotMap.app)._get_participant_role('SPEAKER_01').thenReturn(Constants.Participant.Interviewee)
+        when(TestPlotMap.app)._get_participant_color('SPEAKER_00').thenReturn(PlotMap.MapBarPlot.COLORS[0])
+        when(TestPlotMap.app)._get_participant_color('SPEAKER_01').thenReturn(PlotMap.MapBarPlot.COLORS[1])
         TestPlotMap.fig, TestPlotMap.ax = plt.subplots()
 
     def tearDown(self):

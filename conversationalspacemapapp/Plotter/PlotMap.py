@@ -22,10 +22,10 @@ class MapBarPlot:
         xlim_num = 0
         for utterance in self.map:
             self.ax.barh(
-                utterance.number, utterance.words * self.app.get_participant_role(utterance.speaker).constant,
+                utterance.number, utterance.words * self.app._get_participant_role(utterance.speaker).constant,
                 align='center',
                 height=0.8,
-                color=self.app.get_participant_color(utterance.speaker)
+                color=self.app._get_participant_color(utterance.speaker)
             )
             xlim_num = max([abs(utterance.words) for utterance in self.map]) * 1.1
         index = [*range(1, len(self.map) + 1)]

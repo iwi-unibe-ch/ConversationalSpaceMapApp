@@ -1,4 +1,4 @@
-from conversationalspacemapapp.app import main
+from conversationalspacemapapp.__main__ import main
 
 def run():
-    main().main_loop()
+    main()

@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-import conversationalspacemapapp.Types.Constants as Constants
-
 @dataclass
 class Utterance:
     number: int

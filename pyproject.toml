@@ -59,6 +59,7 @@ icon = "conversationalspacemapapp/resources/icon"
 sources = [
     "conversationalspacemapapp",
 ]
+
 test_sources = [
     "tests",
 ]
