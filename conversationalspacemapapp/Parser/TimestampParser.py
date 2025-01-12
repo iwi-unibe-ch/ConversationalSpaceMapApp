@@ -13,7 +13,7 @@ class TimestampParser(AbstractParser.AbstractParser):
         ]
 
     def _clean_transcript(self) -> str:
-        cleaned_transcript = re.sub(r'\n\[.*?] ', '\n', self._content)
+        cleaned_transcript = re.sub(r"\n\[.*?] ", "\n", self._content)
         cleaned_transcript = cleaned_transcript.replace("\n-", "")
         return cleaned_transcript
 
@@ -29,9 +29,7 @@ class TimestampParser(AbstractParser.AbstractParser):
                 counter += 1
                 output.append(
                     Data.Utterance(
-                        number=counter,
-                        speaker=segments[0],
-                        words=number_of_words
+                        number=counter, speaker=segments[0], words=number_of_words
                     )
                 )
         return output

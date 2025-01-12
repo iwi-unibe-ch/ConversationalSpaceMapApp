@@ -53,5 +53,3 @@ class AbstractParser(abc.ABC):
             else:
                 output.append(utterance.words)
         return output
-
-

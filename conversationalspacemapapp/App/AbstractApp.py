@@ -11,6 +11,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
     """
     Generate conversational space maps for interview data.
     """
+
     save_file_formats = ["PDF", "PNG", "SVG"]
 
     def __init__(self, **kwargs):
@@ -41,7 +42,9 @@ class AbstractApp(metaclass=abc.ABCMeta):
         home = self._create_home_layout()
         transcript = self._create_transcript_layout()
         about = self._create_about_layout()
-        tab_menu = self._create_tab_menu(tabs=[["Home", home],["Transcript", transcript],["About", about]])
+        tab_menu = self._create_tab_menu(
+            tabs=[["Home", home], ["Transcript", transcript], ["About", about]]
+        )
         self._set_window(tab_menu)
 
     @abc.abstractmethod
@@ -57,9 +60,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         participants = self._create_inital_participants_layout()
         label = self._create_info_layout()
         chart = self._create_chart()
-        return self._set_home_window(
-            plot_settings, participants, label, chart
-        )
+        return self._set_home_window(plot_settings, participants, label, chart)
 
     @abc.abstractmethod
     def _set_home_window(self, plot_settings, participants, label, chart):
@@ -112,10 +113,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
             ax = figure.add_subplot(1, 1, 1)
 
             self.map = PlotMap.MapBarPlot(
-                parser=self.parser,
-                ax=ax,
-                fig=figure,
-                app=self
+                parser=self.parser, ax=ax, fig=figure, app=self
             )
             self.map.plot(title=self.plot_title)
             figure.tight_layout()
@@ -124,12 +122,12 @@ class AbstractApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _button_factory(
-            self,
-            label: str,
-            on_press: Callable,
-            enabled: bool = True,
-            padding: int = None,
-            flex: int = None
+        self,
+        label: str,
+        on_press: Callable,
+        enabled: bool = True,
+        padding: int = None,
+        flex: int = None,
     ):
         raise NotImplementedError
 
@@ -186,7 +184,10 @@ class AbstractApp(metaclass=abc.ABCMeta):
         total_words = sum(utterance.words for utterance in self.parser.map)
         text = f"Total words: {total_words} / "
         for participant in self.parser.participants:
-            participant_words = sum(utterance.words if participant==utterance.speaker else 0 for utterance in self.parser.map)
+            participant_words = sum(
+                utterance.words if participant == utterance.speaker else 0
+                for utterance in self.parser.map
+            )
             text += f"Words {participant}: {participant_words} ({round(100 * participant_words / total_words, ndigits=1)}%) / "
         text += f"Total utterances: {len(self.parser.map)}"
         return text
@@ -222,8 +223,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         role_key = speaker_name + "_role"
         if speaker_name in self.parser.participants:
             return self._get_widget_value_by_id(
-                role_key,
-                default_value=Constants.Participant.Undefined
+                role_key, default_value=Constants.Participant.Undefined
             )
         return Constants.Participant.Undefined
 

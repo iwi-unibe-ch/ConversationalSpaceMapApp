@@ -14,10 +14,11 @@ import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 
+
 class ConversationalSpaceMapApp(toga.App):
     default_padding = 5
     default_flex = 1
-    save_file_formats = ["PDF","PNG","SVG"]
+    save_file_formats = ["PDF", "PNG", "SVG"]
 
     @property
     def is_not_empty_file_selection(self):
@@ -49,7 +50,9 @@ class ConversationalSpaceMapApp(toga.App):
 
     def create_about_layout(self):
         # Create app description page
-        description = toga.WebView(url="https://manuelbieri.ch/ConversationalSpaceMapApp/")
+        description = toga.WebView(
+            url="https://manuelbieri.ch/ConversationalSpaceMapApp/"
+        )
         description.style.padding = ConversationalSpaceMapApp.default_padding
         description.style.flex = ConversationalSpaceMapApp.default_flex
         self.set_background(description)
@@ -74,7 +77,10 @@ class ConversationalSpaceMapApp(toga.App):
         # Create participants layout
         self.plot_participants = toga.Box(
             children=[
-                toga.Label("Participants:", style=Pack(padding=ConversationalSpaceMapApp.default_padding))
+                toga.Label(
+                    "Participants:",
+                    style=Pack(padding=ConversationalSpaceMapApp.default_padding),
+                )
             ]
         )
         # Create labels
@@ -87,12 +93,7 @@ class ConversationalSpaceMapApp(toga.App):
 
         # Assemble home layout
         home = toga.Box(
-            children=[
-                plot_settings,
-                self.plot_participants,
-                self.label,
-                self.chart
-            ],
+            children=[plot_settings, self.plot_participants, self.label, self.chart],
             style=Pack(direction=COLUMN),
         )
         self._set_parser()
@@ -106,16 +107,17 @@ class ConversationalSpaceMapApp(toga.App):
         self.file_format.style.padding = ConversationalSpaceMapApp.default_padding
         self.file_format.style.flex = ConversationalSpaceMapApp.default_flex
         self.path_input = toga.Selection(
-            items=self._get_file_history(),
-            on_change=self._set_file
+            items=self._get_file_history(), on_change=self._set_file
         )
         self.path_input.style.padding = ConversationalSpaceMapApp.default_padding
         self.path_input.readonly = True
         self.path_input.style.flex = 10
 
         # Create buttons
-        self.button = self.button_factory('📄', on_press=self.open_handler)
-        self.plot = self.button_factory("🖌", on_press=self.plot_handler, enabled=self.is_not_empty_file_selection)
+        self.button = self.button_factory("📄", on_press=self.open_handler)
+        self.plot = self.button_factory(
+            "🖌", on_press=self.plot_handler, enabled=self.is_not_empty_file_selection
+        )
         self.save = self.button_factory("💾", on_press=self.save_handler, enabled=False)
         plot_settings = toga.Box(
             children=[
@@ -123,7 +125,7 @@ class ConversationalSpaceMapApp(toga.App):
                 self.button,
                 self.plot,
                 self.file_format,
-                self.save
+                self.save,
             ]
         )
         return plot_settings
@@ -132,7 +134,9 @@ class ConversationalSpaceMapApp(toga.App):
         assert self.path_input is not None
         self.plot_participants.clear()
         for participant in self.parser.participants:
-            self.plot_participants.add(self.get_participant_settings_layout(participant))
+            self.plot_participants.add(
+                self.get_participant_settings_layout(participant)
+            )
 
     def get_participant_settings_layout(self, participant: str) -> toga.Box:
         # Create participant label
@@ -143,8 +147,8 @@ class ConversationalSpaceMapApp(toga.App):
         # Create participant role
         role = toga.Selection(
             items=Constants.Participant,
-            id=participant+"_role",
-            on_change=self.plot_handler
+            id=participant + "_role",
+            on_change=self.plot_handler,
         )
         role.style.padding = ConversationalSpaceMapApp.default_padding
         role.style.flex = ConversationalSpaceMapApp.default_flex
@@ -152,19 +156,13 @@ class ConversationalSpaceMapApp(toga.App):
         # Create color picker
         color = toga.Selection(
             items=PlotMap.MapBarPlot.COLORS,
-            id=participant+"_color",
-            on_change=self.plot_handler
+            id=participant + "_color",
+            on_change=self.plot_handler,
         )
         color.style.padding = ConversationalSpaceMapApp.default_padding
         color.style.flex = ConversationalSpaceMapApp.default_flex
 
-        return toga.Box(
-            children=[
-                label,
-                role,
-                color
-            ]
-        )
+        return toga.Box(children=[label, role, color])
 
     def draw_chart(self, chart, figure, *args, **kwargs):
         if self.parser is not None:
@@ -173,10 +171,7 @@ class ConversationalSpaceMapApp(toga.App):
             ax = figure.add_subplot(1, 1, 1)
 
             self.map = PlotMap.MapBarPlot(
-                parser=self.parser,
-                ax=ax,
-                fig=figure,
-                app=self
+                parser=self.parser, ax=ax, fig=figure, app=self
             )
             self.map.plot(title=self.plot_title)
             figure.tight_layout()
@@ -184,17 +179,21 @@ class ConversationalSpaceMapApp(toga.App):
             return
 
     def button_factory(
-            self,
-            label: str,
-            on_press: Callable,
-            enabled: bool = True,
-            padding: int = None,
-            flex: int = None
+        self,
+        label: str,
+        on_press: Callable,
+        enabled: bool = True,
+        padding: int = None,
+        flex: int = None,
     ) -> toga.Button:
         button = toga.Button(label, on_press=on_press)
         button.enabled = enabled
-        button.style.padding = ConversationalSpaceMapApp.default_padding if padding is None else padding
-        button.style.flex = ConversationalSpaceMapApp.default_flex if padding is None else flex
+        button.style.padding = (
+            ConversationalSpaceMapApp.default_padding if padding is None else padding
+        )
+        button.style.flex = (
+            ConversationalSpaceMapApp.default_flex if padding is None else flex
+        )
         return button
 
     @staticmethod
@@ -244,7 +243,7 @@ class ConversationalSpaceMapApp(toga.App):
             file = toga.SaveFileDialog(
                 "Save file",
                 suggested_filename=str(pathlib.Path(self.path_input.value).stem),
-                file_types=ConversationalSpaceMapApp.save_file_formats
+                file_types=ConversationalSpaceMapApp.save_file_formats,
             )
             path = await self.main_window.dialog(file)
             if path is not None:
@@ -258,7 +257,10 @@ class ConversationalSpaceMapApp(toga.App):
         total_words = sum(utterance.words for utterance in self.parser.map)
         text = f"Total words: {total_words} / "
         for participant in self.parser.participants:
-            participant_words = sum(utterance.words if participant==utterance.speaker else 0 for utterance in self.parser.map)
+            participant_words = sum(
+                utterance.words if participant == utterance.speaker else 0
+                for utterance in self.parser.map
+            )
             text += f"Words {participant}: {participant_words} ({round(100 * participant_words / total_words, ndigits=1)}%) / "
         text += f"Total utterances: {len(self.parser.map)}"
         self.label.text = text
@@ -290,16 +292,23 @@ class ConversationalSpaceMapApp(toga.App):
             return []
 
     def get_participant_role(self, speaker_name: str) -> Constants.Participant:
-        role_key = speaker_name+"_role"
-        if speaker_name in self.parser.participants and role_key in self.app.widgets.keys():
-            return self.app.widgets[speaker_name+"_role"].value
+        role_key = speaker_name + "_role"
+        if (
+            speaker_name in self.parser.participants
+            and role_key in self.app.widgets.keys()
+        ):
+            return self.app.widgets[speaker_name + "_role"].value
         return Constants.Participant.Undefined
 
     def get_participant_color(self, speaker_name: str) -> str:
-        color_key = speaker_name+"_color"
-        if speaker_name in self.parser.participants and color_key in self.app.widgets.keys():
-            return self.app.widgets[speaker_name+"_color"].value
+        color_key = speaker_name + "_color"
+        if (
+            speaker_name in self.parser.participants
+            and color_key in self.app.widgets.keys()
+        ):
+            return self.app.widgets[speaker_name + "_color"].value
         return None
+
 
 def main():
     return ConversationalSpaceMapApp(
