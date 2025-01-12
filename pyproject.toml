@@ -3,9 +3,11 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-exclude = ["assets*"]
+exclude = [
+    "assets*",
+    "conversationalspacemapapp/IconConverter*"
+]
 include = [
-    "conversationalspacemapapp/resources/*",
     "conversationalspacemapapp/App/assets/history.txt"
 ]
 
