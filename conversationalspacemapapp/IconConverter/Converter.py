@@ -1,10 +1,11 @@
 import icnsutil
 
 # Load the PNG file
-file = "./resources/icon.png"
+file = "./../App/resources/icon.png"
 output = ""
 
 # compose
 img = icnsutil.IcnsFile()
 img.add_media(file=file)
-img.write('./resources/icon.icns')
+img.write('./../App/resources/icon.ico')
+img.write('./../App/resources/icon.icns')
