@@ -54,10 +54,10 @@ author_email = "mail@manuelbieri.ch"
 formal_name = "ConversationalSpaceMapApp"
 description = "Generate conversational space maps for interview data."
 long_description = """More details about the app should go here."""
-icon = "src/conversationalspacemapapp/resources/conversationalspacemapapp"
+icon = "conversationalspacemapapp/resources/conversationalspacemapapp"
 
 sources = [
-    "src/conversationalspacemapapp",
+    "conversationalspacemapapp",
 ]
 
 test_sources = [

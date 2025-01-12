@@ -5,10 +5,10 @@ from unittest.mock import MagicMock
 import toga
 import matplotlib.pyplot as plt
 
-import src.conversationalspacemapapp.Types.Data as Data
-import src.conversationalspacemapapp.Plotter.PlotMap as PlotMap
-import src.conversationalspacemapapp.Types.Constants as Constants
-import src.conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
+import conversationalspacemapapp.Types.Data as Data
+import conversationalspacemapapp.Plotter.PlotMap as PlotMap
+import conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 
 class TestPlotMap(unittest.TestCase):

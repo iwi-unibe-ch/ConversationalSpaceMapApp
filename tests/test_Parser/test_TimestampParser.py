@@ -1,8 +1,8 @@
 import pathlib
 import unittest
 
-import src.conversationalspacemapapp.Types.Data as Data
-import src.conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
+import conversationalspacemapapp.Types.Data as Data
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 
 class TestTimestampParser(unittest.TestCase):

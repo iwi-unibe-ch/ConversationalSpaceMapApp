@@ -1,6 +1,6 @@
 import unittest
 
-import src.conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.Types.Constants as Constants
 
 
 class TestCustomConstants(unittest.TestCase):
