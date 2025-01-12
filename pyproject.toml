@@ -9,7 +9,6 @@ dependencies = [  # RELEASE
   "toga-chart",
   "toga",
   "mockito",
-  "pyqt6"
 ]
 requires-python = ">= 3.12"
 authors = [
@@ -43,22 +42,22 @@ Repository = "https://github.com/manuelbieri/ConversationalSpaceMapApp.git"
 
 # This project was generated with 0.3.19 using template: https://github.com/beeware/briefcase-template@v0.3.19
 [tool.briefcase]
-project_name = "Conversational Space Map App"
+project_name = "ConversationalSpaceMapApp"
 bundle = "ch.manuelbieri"
 version = "0.0.8" # RELEASE
-url = "https://github.com/manuelbieri/ConversationalSpaceMap"
+url = "https://manuelbieri.ch/conversationalspacemapapp"
 license.file = "LICENSE"
 author = "Manuel Bieri"
 author_email = "mail@manuelbieri.ch"
 
 [tool.briefcase.app.conversationalspacemapapp]
-formal_name = "Conversational Space Map App"
+formal_name = "ConversationalSpaceMapApp"
 description = "Generate conversational space maps for interview data."
 long_description = """More details about the app should go here."""
-icon = "conversationalspacemapapp/resources/icon"
+icon = "src/conversationalspacemapapp/resources/conversationalspacemapapp"
 
 sources = [
-    "conversationalspacemapapp",
+    "src/conversationalspacemapapp",
 ]
 
 test_sources = [
@@ -67,7 +66,6 @@ test_sources = [
 
 requires = [
    "toga-chart",
-    "pyqt6"
 ]
 test_requires = [
     "mockito",

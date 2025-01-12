@@ -152,7 +152,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
 
     def _write_file_history(self):
         assert self.has_path
-        history = pathlib.Path(__file__).parent / "resources" / "history.txt"
+        history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         content = self.path_as_str()
         if history.is_file():
             with open(history, "a") as f:
@@ -201,7 +201,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         self._set_transcript(self.parser.content)
 
     def _get_file_history(self) -> [pathlib.Path]:
-        history = pathlib.Path(__file__).parent / "resources" / "history.txt"
+        history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         if history.is_file():
             with open(history, "r") as f:
                 output = []

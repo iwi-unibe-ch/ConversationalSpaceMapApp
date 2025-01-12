@@ -1,10 +1,10 @@
 import icnsutil
 
 # Load the PNG file
-file = "./resources/icon.png"
+file = "./assets/conversationalspacemapapp.png"
 output = ""
 
 # compose
 img = icnsutil.IcnsFile()
 img.add_media(file=file)
-img.write("./resources/icon.icns")
+img.write("./assets/conversationalspacemapapp.icns")

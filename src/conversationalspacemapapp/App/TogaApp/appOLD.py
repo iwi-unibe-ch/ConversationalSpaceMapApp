@@ -224,7 +224,7 @@ class ConversationalSpaceMapApp(toga.App):
             Exception("File not valid: " + self.path_input.value.as_posix())
 
     def _write_file_history(self):
-        history = pathlib.Path(__file__).parent / "resources" / "history.txt"
+        history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         content = str(self.path_input.value)
         if history.is_file() and len(content.strip()) != 0:
             with open(history, "a") as f:
@@ -277,7 +277,7 @@ class ConversationalSpaceMapApp(toga.App):
                 print("No attribute")
 
     def _get_file_history(self) -> [pathlib.Path]:
-        history = pathlib.Path(__file__).parent / "resources" / "history.txt"
+        history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         if history.is_file():
             with open(history, "r") as f:
                 output = []
@@ -314,5 +314,5 @@ def main():
     return ConversationalSpaceMapApp(
         "Conversational Space Map App",
         "ch.manuelbieri.conversationalspacemapapp",
-        icon="resources/icon.png",
+        icon="assets/conversationalspacemapapp.png",
     )

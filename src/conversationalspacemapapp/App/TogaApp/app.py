@@ -16,9 +16,9 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
     default_padding = 5
     default_flex = 1
 
-    def __init__(self, name, id, icon):
+    def __init__(self, name, id):
         super(ConversationalSpaceMapAppToga, self).__init__(
-            formal_name=name, app_id=id, icon=icon
+            formal_name=name, app_id=id
         )
 
     @property
@@ -251,7 +251,6 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
 def main():
     return ConversationalSpaceMapAppToga(
-        "Conversational Space Map App",
-        "ch.manuelbieri.conversationalspacemapapp",
-        icon="./App/resources/icon.png",
+        "ConversationalSpaceMapApp",
+        "ch.manuelbieri.conversationalspacemapapp"
     )
