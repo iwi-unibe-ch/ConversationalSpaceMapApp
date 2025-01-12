@@ -232,6 +232,11 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         self.chart.redraw()
         self.save.enabled = True
 
+    def _is_new_history_path(self) -> bool:
+        if self.path in self._get_file_history():
+            return False
+        return True
+
     async def _get_save_path(self):
         assert self.has_path
         file = toga.SaveFileDialog(

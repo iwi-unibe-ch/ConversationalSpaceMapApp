@@ -4,11 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 exclude = [
-    "assets*",
-    "conversationalspacemapapp/IconConverter*"
-]
-include = [
-    "conversationalspacemapapp/App/assets/history.txt"
+    "assets*"
 ]
 
 [project]

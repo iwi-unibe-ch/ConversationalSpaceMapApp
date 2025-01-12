@@ -154,8 +154,13 @@ class AbstractApp(metaclass=abc.ABCMeta):
         assert self.has_path
         history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         content = self.path_as_str()
-        if history.is_file():
+        if not self._is_new_history_path():
+            return
+        elif history.is_file():
             with open(history, "a") as f:
+                f.write(content + "\n")
+        else:
+            with open(history, "w") as f:
                 f.write(content + "\n")
 
     def plot_handler(self, widget):
@@ -199,6 +204,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         self._update_plot()
         self._set_info_layout()
         self._set_transcript(self.parser.content)
+        self._write_file_history()
 
     def _get_file_history(self) -> [pathlib.Path]:
         history = pathlib.Path(__file__).parent / "assets" / "history.txt"
@@ -209,11 +215,15 @@ class AbstractApp(metaclass=abc.ABCMeta):
                 for file in files:
                     file = file.strip("\n")
                     file = pathlib.Path(file)
-                    if file.is_file():
+                    if file.is_file() and not file in output:
                         output.append(file)
                 return output
         else:
             return []
+
+    @abc.abstractmethod
+    def _is_new_history_path(self) -> bool:
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _get_widget_value_by_id(self, key: str, default_value=None):

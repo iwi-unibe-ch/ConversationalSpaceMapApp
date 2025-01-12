@@ -44,7 +44,7 @@ class MapBarPlot:
         self.ax.set_yticks(index)
 
         # Set plot labels
-        self.ax.set_title("Conversational Map Space " + title)
+        self.ax.set_title("Conversational Map Space")
         self.ax.text(
             xlim_num / 2,
             -1,
