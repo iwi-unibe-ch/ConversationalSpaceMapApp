@@ -2,8 +2,8 @@ name: Build
 on:
   pull_request:
   push:
-    branches:
-      - master  # update to match the default branch for your repo
+    tags:
+      - '*'
 
 # Cancel active CI runs for a PR before starting another run
 concurrency:
