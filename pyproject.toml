@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ConversationalSpaceMapApp"
-version = "0.0.8" # RELEASE
+version = "0.0.9" # RELEASE
 dependencies = [  # RELEASE
   "toga-chart",
   "toga",
@@ -44,7 +44,7 @@ Repository = "https://github.com/manuelbieri/ConversationalSpaceMapApp.git"
 [tool.briefcase]
 project_name = "ConversationalSpaceMapApp"
 bundle = "ch.manuelbieri"
-version = "0.0.8" # RELEASE
+version = "0.0.9" # RELEASE
 url = "https://manuelbieri.ch/ConversationalSpaceMapApp/"
 license.file = "LICENSE"
 author = "Manuel Bieri"
