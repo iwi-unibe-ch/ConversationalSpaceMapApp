@@ -17,9 +17,7 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
     default_flex = 1
 
     def __init__(self, name, id):
-        super(ConversationalSpaceMapAppToga, self).__init__(
-            formal_name=name, app_id=id
-        )
+        super(ConversationalSpaceMapAppToga, self).__init__(formal_name=name, app_id=id)
 
     @property
     def path(self) -> pathlib.Path | None:
@@ -251,6 +249,5 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
 def main():
     return ConversationalSpaceMapAppToga(
-        "ConversationalSpaceMapApp",
-        "ch.manuelbieri.conversationalspacemapapp"
+        "ConversationalSpaceMapApp", "ch.manuelbieri.conversationalspacemapapp"
     )
