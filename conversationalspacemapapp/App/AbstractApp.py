@@ -1,13 +1,13 @@
 import abc
-
 import pathlib
 from typing import Callable
 
-import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
-class IApp(metaclass=abc.ABCMeta):
+
+class AbstractApp(metaclass=abc.ABCMeta):
     """
     Generate conversational space maps for interview data.
     """
@@ -17,7 +17,7 @@ class IApp(metaclass=abc.ABCMeta):
         self.parser: TranscriptParser.AbstractParser = None
         self.map = None
         self.plot_title = ""
-        super(IApp, self).__init__(**kwargs)
+        super(AbstractApp, self).__init__(**kwargs)
 
     @property
     def path(self) -> pathlib.Path | None:
@@ -46,11 +46,11 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _set_window(self, tab_menu):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_tab_menu(self, tabs):
-        pass
+        raise NotImplementedError
 
     def _create_home_layout(self):
         plot_settings = self._create_plot_settings_layout()
@@ -63,15 +63,15 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _set_home_window(self, plot_settings, participants, label, chart):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_plot_settings_layout(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_inital_participants_layout(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_participants_layout(self):
@@ -79,31 +79,31 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _create_participant_layout(self, participant: str):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_info_layout(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _set_info_layout(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_chart(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_transcript_layout(self):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _set_transcript(self, content: str):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _create_about_layout(self):
-        pass
+        raise NotImplementedError
 
     def draw_chart(self, chart, figure, *args, **kwargs):
         if self.has_parser:
@@ -131,11 +131,11 @@ class IApp(metaclass=abc.ABCMeta):
             padding: int = None,
             flex: int = None
     ):
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _set_transparent_background(widget):
-        pass
+        raise NotImplementedError
 
     async def open_handler(self, widget):
         path = await self._get_path()
@@ -146,11 +146,11 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     async def _get_path(self) -> pathlib.Path | None:
-        pass
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _set_path(self, path: pathlib.Path):
-        pass
+        raise NotImplementedError
 
     def _write_file_history(self):
         assert self.has_path
@@ -167,7 +167,7 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _update_plot(self):
-        pass
+        raise NotImplementedError
 
     async def save_handler(self, widget):
         assert self.has_parser
@@ -179,7 +179,7 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     async def _get_save_path(self) -> pathlib.Path | None:
-        pass
+        raise NotImplementedError
 
     def _get_info_content(self):
         assert self.has_parser
@@ -216,7 +216,7 @@ class IApp(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def _get_widget_value_by_id(self, key: str, default_value=None):
-        pass
+        raise NotImplementedError
 
     def _get_participant_role(self, speaker_name: str) -> Constants.Participant:
         role_key = speaker_name + "_role"

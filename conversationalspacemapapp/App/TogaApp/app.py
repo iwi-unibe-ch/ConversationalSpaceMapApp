@@ -1,21 +1,18 @@
-"""
-Generate conversational space maps for interview data.
-"""
-
 import toga
+import toga_chart
 from toga.style import Pack
 from toga.constants import COLUMN
-import toga_chart
+
 import pathlib
 import platform
 from typing import Callable
 
-import conversationalspacemapapp.App.IApp as IApp
-import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.App.AbstractApp as AbstractApp
 
-class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
+
+class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
     default_padding = 5
     default_flex = 1
 
@@ -128,7 +125,7 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
     def _create_inital_participants_layout(self):
         self.participants_layout = toga.Box(
             children=[
-                toga.Label("Participants:", style=Pack(padding=ConversationalSpaceMapAppToga.default_padding))
+                toga.Label("", style=Pack(padding=ConversationalSpaceMapAppToga.default_padding))
             ]
         )
         return self.participants_layout
@@ -259,5 +256,5 @@ def main():
     return ConversationalSpaceMapAppToga(
         "Conversational Space Map App",
         "ch.manuelbieri.conversationalspacemapapp",
-        icon="resources/icon.png",
+        icon="./App/resources/icon.png",
     )
