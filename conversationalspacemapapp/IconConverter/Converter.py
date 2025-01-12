@@ -7,5 +7,5 @@ output = ""
 # compose
 img = icnsutil.IcnsFile()
 img.add_media(file=file)
-img.write('./../App/resources/icon.ico')
-img.write('./../App/resources/icon.icns')
+img.write("./../App/resources/icon.ico")
+img.write("./../App/resources/icon.icns")
