@@ -2,9 +2,14 @@
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+exclude = [
+    "assets*"
+]
+
 [project]
 name = "ConversationalSpaceMapApp"
-version = "0.0.8" # RELEASE
+version = "0.0.11" # RELEASE
 dependencies = [  # RELEASE
   "toga-chart",
   "toga",
@@ -42,19 +47,19 @@ Repository = "https://github.com/manuelbieri/ConversationalSpaceMapApp.git"
 
 # This project was generated with 0.3.19 using template: https://github.com/beeware/briefcase-template@v0.3.19
 [tool.briefcase]
-project_name = "Conversational Space Map App"
+project_name = "ConversationalSpaceMapApp"
 bundle = "ch.manuelbieri"
-version = "0.0.8" # RELEASE
-url = "https://github.com/manuelbieri/ConversationalSpaceMap"
+version = "0.0.11" # RELEASE
+url = "https://manuelbieri.ch/ConversationalSpaceMapApp/"
 license.file = "LICENSE"
 author = "Manuel Bieri"
 author_email = "mail@manuelbieri.ch"
 
 [tool.briefcase.app.conversationalspacemapapp]
-formal_name = "Conversational Space Map App"
+formal_name = "ConversationalSpaceMapApp"
 description = "Generate conversational space maps for interview data."
 long_description = """More details about the app should go here."""
-icon = "conversationalspacemapapp/resources/icon"
+icon = "conversationalspacemapapp/resources/conversationalspacemapapp"
 
 sources = [
     "conversationalspacemapapp",

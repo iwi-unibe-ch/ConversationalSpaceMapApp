@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Participant(Enum):
     Interviewer = -1
     Interviewee = 1

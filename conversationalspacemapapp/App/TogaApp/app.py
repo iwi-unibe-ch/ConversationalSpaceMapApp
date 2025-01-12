@@ -1,30 +1,23 @@
-"""
-Generate conversational space maps for interview data.
-"""
-
 import toga
+import toga_chart
 from toga.style import Pack
 from toga.constants import COLUMN
-import toga_chart
+
 import pathlib
 import platform
 from typing import Callable
 
-import conversationalspacemapapp.App.IApp as IApp
-import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.App.AbstractApp as AbstractApp
 
-class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
+
+class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
     default_padding = 5
     default_flex = 1
 
-    def __init__(self, name, id, icon):
-        super(ConversationalSpaceMapAppToga, self).__init__(
-            formal_name=name,
-            app_id=id,
-            icon=icon
-        )
+    def __init__(self, name, id):
+        super(ConversationalSpaceMapAppToga, self).__init__(formal_name=name, app_id=id)
 
     @property
     def path(self) -> pathlib.Path | None:
@@ -48,16 +41,16 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         self.main_window.show()
 
     def _create_tab_menu(self, tabs):
-        main = toga.OptionContainer(
-            content=tabs
-        )
+        main = toga.OptionContainer(content=tabs)
         main.style.padding = ConversationalSpaceMapAppToga.default_padding
         self._set_transparent_background(main)
         return main
 
     def _create_about_layout(self):
         # Create app description page
-        description = toga.WebView(url="https://manuelbieri.ch/ConversationalSpaceMapApp/")
+        description = toga.WebView(
+            url="https://manuelbieri.ch/ConversationalSpaceMapApp/"
+        )
         description.style.padding = ConversationalSpaceMapAppToga.default_padding
         description.style.flex = ConversationalSpaceMapAppToga.default_flex
         self._set_transparent_background(description)
@@ -86,12 +79,7 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         assert label is not None
         assert chart is not None
         return toga.Box(
-            children=[
-                plot_settings,
-                participants,
-                label,
-                chart
-            ],
+            children=[plot_settings, participants, label, chart],
             style=Pack(direction=COLUMN),
         )
 
@@ -103,24 +91,27 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         self.file_format.style.padding = ConversationalSpaceMapAppToga.default_padding
         self.file_format.style.flex = ConversationalSpaceMapAppToga.default_flex
         self.path_input = toga.Selection(
-            items=self._get_file_history(),
-            on_change=self._set_parser
+            items=self._get_file_history(), on_change=self._set_parser
         )
         self.path_input.style.padding = ConversationalSpaceMapAppToga.default_padding
         self.path_input.readonly = True
         self.path_input.style.flex = 10
 
         # Create buttons
-        self.button = self._button_factory('📄', on_press=self.open_handler)
-        self.plot = self._button_factory("🖌", on_press=self.plot_handler, enabled=self.has_path)
-        self.save = self._button_factory("💾", on_press=self.save_handler, enabled=False)
+        self.button = self._button_factory("📄", on_press=self.open_handler)
+        self.plot = self._button_factory(
+            "🖌", on_press=self.plot_handler, enabled=self.has_path
+        )
+        self.save = self._button_factory(
+            "💾", on_press=self.save_handler, enabled=False
+        )
         plot_settings = toga.Box(
             children=[
                 self.path_input,
                 self.button,
                 self.plot,
                 self.file_format,
-                self.save
+                self.save,
             ]
         )
         return plot_settings
@@ -128,7 +119,10 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
     def _create_inital_participants_layout(self):
         self.participants_layout = toga.Box(
             children=[
-                toga.Label("Participants:", style=Pack(padding=ConversationalSpaceMapAppToga.default_padding))
+                toga.Label(
+                    "",
+                    style=Pack(padding=ConversationalSpaceMapAppToga.default_padding),
+                )
             ]
         )
         return self.participants_layout
@@ -164,8 +158,8 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         # Create participant role
         role = toga.Selection(
             items=Constants.Participant,
-            id=participant+"_role",
-            on_change=self.plot_handler
+            id=participant + "_role",
+            on_change=self.plot_handler,
         )
         role.style.padding = ConversationalSpaceMapAppToga.default_padding
         role.style.flex = ConversationalSpaceMapAppToga.default_flex
@@ -173,19 +167,13 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         # Create color picker
         color = toga.Selection(
             items=PlotMap.MapBarPlot.COLORS,
-            id=participant+"_color",
-            on_change=self.plot_handler
+            id=participant + "_color",
+            on_change=self.plot_handler,
         )
         color.style.padding = ConversationalSpaceMapAppToga.default_padding
         color.style.flex = ConversationalSpaceMapAppToga.default_flex
 
-        return toga.Box(
-            children=[
-                label,
-                role,
-                color
-            ]
-        )
+        return toga.Box(children=[label, role, color])
 
     def draw_chart(self, chart, figure, *args, **kwargs):
         if self.has_parser:
@@ -194,10 +182,7 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
             ax = figure.add_subplot(1, 1, 1)
 
             self.map = PlotMap.MapBarPlot(
-                parser=self.parser,
-                ax=ax,
-                fig=figure,
-                app=self
+                parser=self.parser, ax=ax, fig=figure, app=self
             )
             self.map.plot(title=self.plot_title)
             figure.tight_layout()
@@ -205,17 +190,23 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
             return
 
     def _button_factory(
-            self,
-            label: str,
-            on_press: Callable,
-            enabled: bool = True,
-            padding: int = None,
-            flex: int = None
+        self,
+        label: str,
+        on_press: Callable,
+        enabled: bool = True,
+        padding: int = None,
+        flex: int = None,
     ) -> toga.Button:
         button = toga.Button(label, on_press=on_press)
         button.enabled = enabled
-        button.style.padding = ConversationalSpaceMapAppToga.default_padding if padding is None else padding
-        button.style.flex = ConversationalSpaceMapAppToga.default_flex if padding is None else flex
+        button.style.padding = (
+            ConversationalSpaceMapAppToga.default_padding
+            if padding is None
+            else padding
+        )
+        button.style.flex = (
+            ConversationalSpaceMapAppToga.default_flex if padding is None else flex
+        )
         return button
 
     @staticmethod
@@ -241,12 +232,17 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
         self.chart.redraw()
         self.save.enabled = True
 
+    def _is_new_history_path(self) -> bool:
+        if self.path in self._get_file_history():
+            return False
+        return True
+
     async def _get_save_path(self):
         assert self.has_path
         file = toga.SaveFileDialog(
             "Save file",
             suggested_filename=str(pathlib.Path(self.path).stem),
-            file_types=ConversationalSpaceMapAppToga.save_file_formats
+            file_types=ConversationalSpaceMapAppToga.save_file_formats,
         )
         return await self.main_window.dialog(file)
 
@@ -255,9 +251,8 @@ class ConversationalSpaceMapAppToga(IApp.IApp, toga.App):
             return self.app.widgets[key].value
         return default_value
 
+
 def main():
     return ConversationalSpaceMapAppToga(
-        "Conversational Space Map App",
-        "ch.manuelbieri.conversationalspacemapapp",
-        icon="resources/icon.png",
+        "ConversationalSpaceMapApp", "ch.manuelbieri.conversationalspacemapapp"
     )
