@@ -10,7 +10,7 @@ import pathlib
 import platform
 from typing import Callable
 
-import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 
@@ -266,7 +266,7 @@ class ConversationalSpaceMapApp(toga.App):
 
     def _set_parser(self):
         if self.is_not_empty_file_selection:
-            self.parser = TranscriptParser.TimestampCleanParser(self.path_input.value)
+            self.parser = TranscriptParser.TimestampParser(self.path_input.value)
             self.set_plot_participants_layout()
             self._set_label()
             try:

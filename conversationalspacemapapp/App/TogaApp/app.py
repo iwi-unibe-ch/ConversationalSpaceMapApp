@@ -11,7 +11,7 @@ import platform
 from typing import Callable
 
 import conversationalspacemapapp.App.IApp as IApp
-import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 

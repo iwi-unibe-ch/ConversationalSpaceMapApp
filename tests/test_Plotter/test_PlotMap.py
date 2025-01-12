@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import toga
 from mockito import when
 
-import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 import conversationalspacemapapp.Types.Data as Data

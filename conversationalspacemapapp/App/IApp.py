@@ -3,7 +3,7 @@ import abc
 import pathlib
 from typing import Callable
 
-import conversationalspacemapapp.Parser.TranscriptParser as TranscriptParser
+import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 
@@ -193,7 +193,7 @@ class IApp(metaclass=abc.ABCMeta):
 
     def _set_parser(self, widget=None):
         assert self.has_path
-        self.parser = TranscriptParser.TimestampCleanParser(self.path)
+        self.parser = TranscriptParser.TimestampParser(self.path)
         self._create_participants_layout()
         self._update_plot()
         self._set_info_layout()
