@@ -1,2 +1,3 @@
 *.pyc
 /conversationalspacemapapp.dist-info
+/conversationalspacemapapp/App/assets/history.txt
