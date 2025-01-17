@@ -1,27 +1,14 @@
-import pathlib
 import unittest
 
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
+import tests.TestResources as TestResources
+
 
 class TestTimestampParser(unittest.TestCase):
     # Unlimited return of error messages
     maxDiff = None
-
-    # Timestamps cleaned up files (timestamp file without time brackets)
-    path_short_transcript = (
-        pathlib.Path(__file__).parent
-        / "test_short_transcript/transcription_timestamps.txt"
-    )
-    content_short_transcript = """Interviewer Ich habe noch nie so ein schlechtes Interview gesehen. Red jetzt nicht so klar, Mona.\n\nInterviewee Jetzt noch etwas nuscheln.\n\n"""
-    path_long_transcript = (
-        pathlib.Path(__file__).parent / "test_transcript/transcription_timestamps.txt"
-    )
-    path_multiple_speaker_transcript = (
-        pathlib.Path(__file__).parent
-        / "test_transcript_multiple_speakers/transcription_timestamps.txt"
-    )
 
     # Define parser
     parser: TranscriptParser.AbstractParser
@@ -30,20 +17,20 @@ class TestTimestampParser(unittest.TestCase):
     def setUpParser(cls, short=True, multiple_speaker=False):
         if multiple_speaker:  # Long transcript with multiple speakers
             return TranscriptParser.TimestampParser(
-                file=TestTimestampParser.path_multiple_speaker_transcript
+                file=TestResources.path_multiple_speaker_transcript
             )
         elif short:
             return TranscriptParser.TimestampParser(
-                file=TestTimestampParser.path_short_transcript
+                file=TestResources.path_short_transcript
             )
         else:
             return TranscriptParser.TimestampParser(
-                file=TestTimestampParser.path_long_transcript
+                file=TestResources.path_long_transcript
             )
 
     def test_transcript_timestamp_short(self):
         parser = TestTimestampParser.setUpParser()
-        self.assertEqual(parser.content, TestTimestampParser.content_short_transcript)
+        self.assertEqual(parser.content, TestResources.content_short_transcript)
 
     def test_transcript_timestamp_map_short(self):
         parser = TestTimestampParser.setUpParser()

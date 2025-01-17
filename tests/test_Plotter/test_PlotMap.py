@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
+import conversationalspacemapapp.Plotter.ColorPicker as ColorPicker
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 
@@ -31,10 +32,10 @@ class TestPlotMap(unittest.TestCase):
             Constants.Participant.Interviewee
         )
         when(TestPlotMap.app)._get_participant_color("SPEAKER_00").thenReturn(
-            PlotMap.MapBarPlot.COLORS[0]
+            ColorPicker.ColorPicker.pastel()[0]
         )
         when(TestPlotMap.app)._get_participant_color("SPEAKER_01").thenReturn(
-            PlotMap.MapBarPlot.COLORS[1]
+            ColorPicker.ColorPicker.pastel()[1]
         )
         TestPlotMap.fig, TestPlotMap.ax = plt.subplots()
 
