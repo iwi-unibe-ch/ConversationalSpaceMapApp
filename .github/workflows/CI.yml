@@ -4,10 +4,10 @@ on: [push, pull_request]
 
 jobs:
   run:
-    runs-on: macos
+    runs-on: macOS
 
     env:
-      OS: macos
+      OS: macOS
       PYTHON: '3.12'
     steps:
     - uses: actions/checkout@v2
