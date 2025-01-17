@@ -29,4 +29,5 @@ jobs:
         pip install coverage
         python -c "import matplotlib as mpl; print(mpl.get_cachedir())"
         rmdir ~\.matplotlib
+        rmdir ~\.cache\fontconfig
         python -m unittest discover tests "test_*.py"
