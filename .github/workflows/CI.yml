@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      OS: ubuntu-latest
+      OS: macos
       PYTHON: '3.12'
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +21,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt update
-        sudo apt install git build-essential pkg-config python3-dev libgirepository1.0-dev libcairo2-dev gir1.2-gtk-3.0 libcanberra-gtk3-module
+        # sudo apt update
+        # sudo apt install git build-essential pkg-config python3-dev libgirepository1.0-dev libcairo2-dev gir1.2-gtk-3.0 libcanberra-gtk3-module
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
