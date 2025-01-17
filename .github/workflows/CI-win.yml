@@ -24,7 +24,16 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
+    - name: Cache Matplotlib font cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/matplotlib
+        key: ${{ runner.os }}-matplotlib-cache
+
+    - name: Prebuild Matplotlib font cache
+      run: |
+        python -c "import matplotlib.pyplot as plt; plt.figure()"
+
     - name: Generate Report
       run: |
-        pip install coverage
         python -m unittest discover tests "test_*.py"
