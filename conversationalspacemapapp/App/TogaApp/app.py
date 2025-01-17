@@ -10,6 +10,7 @@ from typing import Callable
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 import conversationalspacemapapp.App.AbstractApp as AbstractApp
+import conversationalspacemapapp.Plotter.ColorPicker as ColorPicker
 
 
 class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
@@ -117,15 +118,16 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         return plot_settings
 
     def _create_inital_participants_layout(self):
-        self.participants_layout = toga.Box(
-            children=[
-                toga.Label(
-                    "",
-                    style=Pack(padding=ConversationalSpaceMapAppToga.default_padding),
-                )
-            ]
+        self.participants_layout = toga.OptionContainer(
+            content=[("General", self._create_general_participants_layout())],
+            style=Pack(padding=ConversationalSpaceMapAppToga.default_padding),
         )
         return self.participants_layout
+
+    def _create_general_participants_layout(self):
+        color_palette = toga.Selection(items=ColorPicker.Palette.available_palettes())
+        self._general_participants_layout = toga.Box(children=[color_palette])
+        return self._general_participants_layout
 
     def _create_info_layout(self):
         self.label = toga.Label("")
@@ -145,16 +147,19 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
     def _create_participants_layout(self):
         assert self.has_path
-        self.participants_layout.clear()
+        self._clear_participants_layout()
         for participant in self.parser.participants:
-            self.participants_layout.add(self._create_participant_layout(participant))
+            self.participants_layout.content.append(
+                participant, self._create_participant_layout(participant)
+            )
+
+    def _clear_participants_layout(self):
+        self.participants_layout.current_tab = 0
+        for _ in range(1, len(self.participants_layout.content)):
+            self.participants_layout.content.remove(1)
+        assert len(self.participants_layout.content) == 1
 
     def _create_participant_layout(self, participant: str) -> toga.Box:
-        # Create participant label
-        label = toga.Label(participant)
-        label.style.padding = ConversationalSpaceMapAppToga.default_padding
-        label.style.flex = ConversationalSpaceMapAppToga.default_flex
-
         # Create participant role
         role = toga.Selection(
             items=Constants.Participant,
@@ -166,14 +171,14 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
         # Create color picker
         color = toga.Selection(
-            items=PlotMap.MapBarPlot.COLORS,
+            items=ColorPicker.ColorPicker.pastel(),
             id=participant + "_color",
             on_change=self.plot_handler,
         )
         color.style.padding = ConversationalSpaceMapAppToga.default_padding
         color.style.flex = ConversationalSpaceMapAppToga.default_flex
 
-        return toga.Box(children=[label, role, color])
+        return toga.Box(children=[role, color])
 
     def draw_chart(self, chart, figure, *args, **kwargs):
         if self.has_parser:
@@ -247,8 +252,10 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         return await self.main_window.dialog(file)
 
     def _get_widget_value_by_id(self, key: str, default_value=None):
-        if key in self.app.widgets.keys():
-            return self.app.widgets[key].value
+        for tab in self.participants_layout.content:
+            for child in tab.content.children:
+                if child.id == key:
+                    return child.value
         return default_value
 
 

@@ -106,19 +106,9 @@ class AbstractApp(metaclass=abc.ABCMeta):
     def _create_about_layout(self):
         raise NotImplementedError
 
+    @abc.abstractmethod
     def draw_chart(self, chart, figure, *args, **kwargs):
-        if self.has_parser:
-            figure.clf()
-            # Add a subplot that is a histogram of the data, using the normal matplotlib API
-            ax = figure.add_subplot(1, 1, 1)
-
-            self.map = PlotMap.MapBarPlot(
-                parser=self.parser, ax=ax, fig=figure, app=self
-            )
-            self.map.plot(title=self.plot_title)
-            figure.tight_layout()
-        else:
-            return
+        raise NotImplementedError
 
     @abc.abstractmethod
     def _button_factory(
