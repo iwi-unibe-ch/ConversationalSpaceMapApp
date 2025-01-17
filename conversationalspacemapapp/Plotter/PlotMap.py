@@ -1,11 +1,10 @@
-import matplotlib.pyplot as plt
 import toga
+import matplotlib.pyplot as plt
+
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 
 class MapBarPlot:
-    COLORS: list[str] = ["salmon", "gold", "lawngreen", "turquoise", "thistle"]
-
     def __init__(
         self,
         parser: TranscriptParser.AbstractParser,
