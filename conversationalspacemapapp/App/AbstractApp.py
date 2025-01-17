@@ -149,6 +149,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
             with open(history, "a") as f:
                 f.write(content + "\n")
         else:
+            history.parent.mkdir(exist_ok=True, parents=True)
             with open(history, "w") as f:
                 f.write(content + "\n")
 
