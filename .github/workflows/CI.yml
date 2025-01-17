@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   run:
-    runs-on: macOS
+    runs-on: macos-latest
 
     env:
       OS: macOS
