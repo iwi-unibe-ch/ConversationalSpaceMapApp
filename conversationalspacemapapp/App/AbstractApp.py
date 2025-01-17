@@ -2,7 +2,6 @@ import abc
 import pathlib
 from typing import Callable
 
-import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
