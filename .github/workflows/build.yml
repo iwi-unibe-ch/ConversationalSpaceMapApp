@@ -19,7 +19,7 @@ defaults:
 
 jobs:
   ci:
-    name: Test and Package
+    name: Package
     runs-on: ${{ matrix.runs-on }}
     strategy:
       fail-fast: false
