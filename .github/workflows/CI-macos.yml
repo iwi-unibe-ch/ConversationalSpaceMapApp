@@ -1,0 +1,38 @@
+name: CI-macOS
+
+on: [push, pull_request]
+
+jobs:
+  run:
+    runs-on: macos-latest
+
+    env:
+      OS: macOS
+      PYTHON: '3.12'
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: ‘2’
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.12
+
+    - name: Install dependencies
+      run: |
+        # sudo apt update
+        # sudo apt install git build-essential pkg-config python3-dev libgirepository1.0-dev libcairo2-dev gir1.2-gtk-3.0 libcanberra-gtk3-module
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+
+    - name: Generate Report
+      run: |
+        pip install coverage
+        coverage run -m unittest discover tests "test_*.py"
+        coverage xml
+
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}

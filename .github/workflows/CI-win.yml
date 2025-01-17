@@ -1,13 +1,13 @@
-name: CI
+name: CI-win
 
 on: [push, pull_request]
 
 jobs:
   run:
-    runs-on: macos-latest
+    runs-on: windows-latest
 
     env:
-      OS: macOS
+      OS: windows
       PYTHON: '3.12'
     steps:
     - uses: actions/checkout@v2
