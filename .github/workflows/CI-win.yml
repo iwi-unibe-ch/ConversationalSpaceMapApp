@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: windows-2025
 
     env:
       OS: windows
@@ -22,8 +22,6 @@ jobs:
     - name: Install dependencies
       run: |
         git --version
-        curl -o git-installer.exe https://github.com/git-for-windows/git/releases/latest/download/Git-2.48.1-64-bit.exe
-        git-installer.exe /SILENT
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
