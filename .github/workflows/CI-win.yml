@@ -29,4 +29,5 @@ jobs:
         pip install coverage
         python -c "import matplotlib as mpl; print(mpl.__version__)"
         rmdir ~\.matplotlib
+        echo "MPLBACKEND=Agg" >> $GITHUB_ENV
         python -m unittest discover tests "test_*.py"
