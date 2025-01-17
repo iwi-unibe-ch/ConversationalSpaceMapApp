@@ -3,7 +3,10 @@ from mockito import when
 from unittest.mock import MagicMock
 
 import toga
+import matplotlib
 import matplotlib.pyplot as plt
+
+matplotlib.use('Agg')
 
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
