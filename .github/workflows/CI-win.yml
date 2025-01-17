@@ -27,5 +27,5 @@ jobs:
     - name: Generate Report
       run: |
         pip install coverage
-        python -c "import matplotlib; print matplotlib.__version__"
+        python -c "import matplotlib as mpl; print(mpl.get_cachedir())"
         python -m unittest discover tests "test_*.py"
