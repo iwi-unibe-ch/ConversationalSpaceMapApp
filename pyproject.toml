@@ -9,7 +9,7 @@ exclude = [
 
 [project]
 name = "ConversationalSpaceMapApp"
-version = "0.1.0" # RELEASE
+version = "0.1.1" # RELEASE
 dependencies = [  # RELEASE
   "toga-chart",
   "toga",
@@ -49,7 +49,7 @@ Repository = "https://github.com/manuelbieri/ConversationalSpaceMapApp.git"
 [tool.briefcase]
 project_name = "ConversationalSpaceMapApp"
 bundle = "ch.manuelbieri"
-version = "0.1.0" # RELEASE
+version = "0.1.1" # RELEASE
 url = "https://manuelbieri.ch/ConversationalSpaceMapApp/"
 license.file = "LICENSE"
 author = "Manuel Bieri"
