@@ -16,7 +16,6 @@ class AbstractApp(metaclass=abc.ABCMeta):
     def __init__(self, **kwargs):
         self.parser: TranscriptParser.AbstractParser = None
         self.map = None
-        self.plot_title = ""
         super(AbstractApp, self).__init__(**kwargs)
 
     @property
@@ -56,7 +55,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
 
     def _create_home_layout(self):
         plot_settings = self._create_plot_settings_layout()
-        participants = self._create_inital_participants_layout()
+        participants = self._create_initial_participants_layout()
         label = self._create_info_layout()
         chart = self._create_chart()
         return self._set_home_window(plot_settings, participants, label, chart)
@@ -70,7 +69,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _create_inital_participants_layout(self):
+    def _create_initial_participants_layout(self):
         raise NotImplementedError
 
     @abc.abstractmethod
@@ -121,7 +120,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _set_transparent_background(widget):
+    def _set_transparent_background(self):
         raise NotImplementedError
 
     async def open_handler(self, widget):
@@ -187,16 +186,22 @@ class AbstractApp(metaclass=abc.ABCMeta):
         text += f"Total utterances: {len(self.parser.map)}"
         return text
 
+    @abc.abstractmethod
+    def _set_plot_title(self):
+        raise NotImplementedError
+
     def _set_parser(self, widget=None):
         assert self.has_path
         self.parser = TranscriptParser.TimestampParser(self.path)
         self._create_participants_layout()
+        self._set_plot_title()
         self._update_plot()
         self._set_info_layout()
         self._set_transcript(self.parser.content)
         self._write_file_history()
 
-    def _get_file_history(self) -> [pathlib.Path]:
+    @staticmethod
+    def _get_file_history() -> [pathlib.Path]:
         history = pathlib.Path(__file__).parent / "assets" / "history.txt"
         if history.is_file():
             with open(history, "r") as f:
@@ -231,4 +236,10 @@ class AbstractApp(metaclass=abc.ABCMeta):
         color_key = speaker_name + "_color"
         if speaker_name in self.parser.participants:
             return self._get_widget_value_by_id(color_key)
+        return None
+
+    def _get_participant_name(self, speaker_name: str) -> str | None:
+        name_key = speaker_name + "_name"
+        if speaker_name in self.parser.participants:
+            return self._get_widget_value_by_id(name_key)
         return None

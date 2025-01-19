@@ -6,7 +6,7 @@ import toga
 import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use('Agg')
+matplotlib.use("Agg")
 
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
@@ -38,6 +38,12 @@ class TestPlotMap(unittest.TestCase):
             ColorPicker.ColorPicker.pastel()[0]
         )
         when(TestPlotMap.app)._get_participant_color("SPEAKER_01").thenReturn(
+            ColorPicker.ColorPicker.pastel()[1]
+        )
+        when(TestPlotMap.app)._get_participant_name("SPEAKER_00").thenReturn(
+            ColorPicker.ColorPicker.pastel()[0]
+        )
+        when(TestPlotMap.app)._get_participant_name("SPEAKER_01").thenReturn(
             ColorPicker.ColorPicker.pastel()[1]
         )
         TestPlotMap.fig, TestPlotMap.ax = plt.subplots()

@@ -29,6 +29,10 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         return self.path is not None and self.path.is_file()
 
     @property
+    def path_filename(self) -> str | None:
+        return str(self.path.name) if self.has_path else None
+
+    @property
     def has_parser(self):
         return self.parser is not None
 
@@ -89,23 +93,24 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         self.file_format = toga.Selection(
             items=ConversationalSpaceMapAppToga.save_file_formats
         )
-        self.file_format.style.padding = ConversationalSpaceMapAppToga.default_padding
-        self.file_format.style.flex = ConversationalSpaceMapAppToga.default_flex
+        self._set_widget_style(self.file_format, flex=0)
         self.path_input = toga.Selection(
             items=self._get_file_history(), on_change=self._set_parser
         )
-        self.path_input.style.padding = ConversationalSpaceMapAppToga.default_padding
+        self._set_widget_style(self.path_input, flex=1)
         self.path_input.readonly = True
-        self.path_input.style.flex = 10
 
         # Create buttons
         self.button = self._button_factory("📄", on_press=self.open_handler)
+        self._set_widget_style(self.button, flex=0)
         self.plot = self._button_factory(
             "🖌", on_press=self.plot_handler, enabled=self.has_path
         )
+        self._set_widget_style(self.plot, flex=0)
         self.save = self._button_factory(
             "💾", on_press=self.save_handler, enabled=False
         )
+        self._set_widget_style(self.save, flex=0)
         plot_settings = toga.Box(
             children=[
                 self.path_input,
@@ -117,16 +122,41 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         )
         return plot_settings
 
-    def _create_inital_participants_layout(self):
+    def _create_initial_participants_layout(self):
         self.participants_layout = toga.OptionContainer(
             content=[("General", self._create_general_participants_layout())],
-            style=Pack(padding=ConversationalSpaceMapAppToga.default_padding),
+            style=Pack(
+                padding=ConversationalSpaceMapAppToga.default_padding, height=60
+            ),
         )
         return self.participants_layout
 
     def _create_general_participants_layout(self):
-        color_palette = toga.Selection(items=ColorPicker.Palette.available_palettes())
-        self._general_participants_layout = toga.Box(children=[color_palette])
+        self.color_palette = self._set_widget_style(
+            toga.Selection(
+                items=ColorPicker.Palette.available_palettes(),
+                on_change=self._set_participants_color_selection,
+            ),
+        )
+        self.plot_title_input = self._set_widget_style(toga.TextInput())
+        self.plot_legend = self._set_widget_style(
+            toga.Switch(text="Legend", on_change=self.plot_handler, value=True), flex=0
+        )
+        self.plot_labels = self._set_widget_style(
+            toga.Switch(text="Labels", on_change=self.plot_handler, value=True), flex=0
+        )
+        self.plot_grid = self._set_widget_style(
+            toga.Switch(text="Grid", on_change=self.plot_handler, value=True), flex=0
+        )
+        self._general_participants_layout = toga.Box(
+            children=[
+                self.color_palette,
+                self.plot_title_input,
+                self.plot_legend,
+                self.plot_labels,
+                self.plot_grid,
+            ]
+        )
         return self._general_participants_layout
 
     def _create_info_layout(self):
@@ -141,8 +171,7 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
     def _create_chart(self):
         self.chart = toga_chart.Chart(style=Pack(flex=1), on_draw=self.draw_chart)
-        self.chart.style.padding = ConversationalSpaceMapAppToga.default_padding
-        self.chart.style.flex = ConversationalSpaceMapAppToga.default_flex
+        self._set_widget_style(self.chart)
         return self.chart
 
     def _create_participants_layout(self):
@@ -166,19 +195,108 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
             id=participant + "_role",
             on_change=self.plot_handler,
         )
-        role.style.padding = ConversationalSpaceMapAppToga.default_padding
-        role.style.flex = ConversationalSpaceMapAppToga.default_flex
+        self._set_widget_style(role)
 
-        # Create color picker
-        color = toga.Selection(
-            items=ColorPicker.ColorPicker.pastel(),
-            id=participant + "_color",
+        # Create participant name label
+        name = toga.TextInput(
+            value=participant,
+            id=participant + "_name",
             on_change=self.plot_handler,
         )
-        color.style.padding = ConversationalSpaceMapAppToga.default_padding
-        color.style.flex = ConversationalSpaceMapAppToga.default_flex
+        self._set_widget_style(name)
 
-        return toga.Box(children=[role, color])
+        # Create color picker
+        color = toga.TextInput(
+            value=self.color_palette.value.value[0],
+            id=participant + "_color",
+            on_change=self.plot_handler,
+            readonly=True,
+        )
+        self._set_widget_style(color, flex=0)
+        button_color_1 = toga.Button(
+            "",
+            id=participant + "_color1",
+            style=Pack(background_color=self.color_palette.value.value[0]),
+            on_press=lambda e: self._set_participant_color(color, 0),
+        )
+        button_color_2 = toga.Button(
+            "",
+            id=participant + "_color2",
+            style=Pack(background_color=self.color_palette.value.value[1]),
+            on_press=lambda e: self._set_participant_color(color, 1),
+        )
+        button_color_3 = toga.Button(
+            "",
+            id=participant + "_color3",
+            style=Pack(background_color=self.color_palette.value.value[2]),
+            on_press=lambda e: self._set_participant_color(color, 2),
+        )
+        button_color_4 = toga.Button(
+            "",
+            id=participant + "_color4",
+            style=Pack(background_color=self.color_palette.value.value[3]),
+            on_press=lambda e: self._set_participant_color(color, 3),
+        )
+        button_color_5 = toga.Button(
+            "",
+            id=participant + "_color5",
+            style=Pack(background_color=self.color_palette.value.value[4]),
+            on_press=lambda e: self._set_participant_color(color, 4),
+        )
+        button_color_6 = toga.Button(
+            "",
+            id=participant + "_color6",
+            style=Pack(background_color=self.color_palette.value.value[5]),
+            on_press=lambda e: self._set_participant_color(color, 5),
+        )
+        button_color_7 = toga.Button(
+            "",
+            id=participant + "_color7",
+            style=Pack(background_color=self.color_palette.value.value[6]),
+            on_press=lambda e: self._set_participant_color(color, 6),
+        )
+        button_color_8 = toga.Button(
+            "",
+            id=participant + "_color8",
+            style=Pack(background_color=self.color_palette.value.value[7]),
+            on_press=lambda e: self._set_participant_color(color, 7),
+        )
+        self._set_widget_style(button_color_1, flex=0)
+        self._set_widget_style(button_color_2, flex=0)
+        self._set_widget_style(button_color_3, flex=0)
+        self._set_widget_style(button_color_4, flex=0)
+        self._set_widget_style(button_color_5, flex=0)
+        self._set_widget_style(button_color_6, flex=0)
+        self._set_widget_style(button_color_7, flex=0)
+        self._set_widget_style(button_color_8, flex=0)
+
+        return toga.Box(
+            children=[
+                role,
+                name,
+                button_color_1,
+                button_color_2,
+                button_color_3,
+                button_color_4,
+                button_color_5,
+                button_color_6,
+                button_color_7,
+                button_color_8,
+                color,
+            ]
+        )
+
+    def _set_participants_color_selection(self, e):
+        assert self.has_parser
+        for participant in self.parser.participants:
+            for i in range(8):
+                color_button = self._get_widget_by_id(
+                    participant + "_color" + str(i + 1)
+                )
+                color_button.style.background_color = self.color_palette.value.value[i]
+
+    def _set_participant_color(self, color_widget: toga.Widget, index: int) -> None:
+        color_widget.value = self.color_palette.value.value[index]
 
     def draw_chart(self, chart, figure, *args, **kwargs):
         if self.has_parser:
@@ -189,7 +307,12 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
             self.map = PlotMap.MapBarPlot(
                 parser=self.parser, ax=ax, fig=figure, app=self
             )
-            self.map.plot(title=self.plot_title)
+            self.map.plot(
+                title=self.plot_title_input.value,
+                labels=self.plot_labels.value,
+                legend=self.plot_legend.value,
+                grid=self.plot_grid.value,
+            )
             figure.tight_layout()
         else:
             return
@@ -199,20 +322,43 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         label: str,
         on_press: Callable,
         enabled: bool = True,
-        padding: int = None,
-        flex: int = None,
+        padding: float = None,
+        flex: float = None,
     ) -> toga.Button:
         button = toga.Button(label, on_press=on_press)
         button.enabled = enabled
-        button.style.padding = (
-            ConversationalSpaceMapAppToga.default_padding
-            if padding is None
-            else padding
-        )
-        button.style.flex = (
-            ConversationalSpaceMapAppToga.default_flex if padding is None else flex
-        )
+        self._set_widget_style(button, padding=padding, flex=flex)
         return button
+
+    @staticmethod
+    def _set_default_widget_flex(widget: toga.Widget) -> toga.Widget:
+        widget.style.flex = ConversationalSpaceMapAppToga.default_flex
+        return widget
+
+    @staticmethod
+    def _set_default_widget_padding(widget: toga.Widget) -> toga.Widget:
+        widget.style.padding = ConversationalSpaceMapAppToga.default_padding
+        return widget
+
+    @staticmethod
+    def _set_widget_style(
+        widget: toga.Widget,
+        padding: float = None,
+        flex: float = None,
+    ) -> toga.Widget:
+        if padding is None and flex is None:
+            ConversationalSpaceMapAppToga._set_default_widget_flex(widget)
+            ConversationalSpaceMapAppToga._set_default_widget_padding(widget)
+        elif padding is None:
+            ConversationalSpaceMapAppToga._set_default_widget_padding(widget)
+            widget.style.flex = flex
+        elif flex is None:
+            ConversationalSpaceMapAppToga._set_default_widget_flex(widget)
+            widget.style.padding = padding
+        else:
+            widget.style.padding = padding
+            widget.style.flex = flex
+        return widget
 
     @staticmethod
     def _set_transparent_background(widget):
@@ -230,8 +376,11 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         except ValueError:
             self.path_input.items.append(path)
             self.path_input.value = path
-        self.plot_title = self.path.stem
         self._set_parser()
+
+    def _set_plot_title(self):
+        assert self.has_path
+        self.plot_title_input.value = "Conversational Space Map " + str(self.path.stem)
 
     def _update_plot(self):
         self.chart.redraw()
@@ -252,11 +401,17 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         return await self.main_window.dialog(file)
 
     def _get_widget_value_by_id(self, key: str, default_value=None):
+        widget: toga.Widget = self._get_widget_by_id(key)
+        if widget is None:
+            return default_value
+        return widget.value
+
+    def _get_widget_by_id(self, key: str) -> toga.Widget | None:
         for tab in self.participants_layout.content:
             for child in tab.content.children:
                 if child.id == key:
-                    return child.value
-        return default_value
+                    return child
+        return None
 
 
 def main():

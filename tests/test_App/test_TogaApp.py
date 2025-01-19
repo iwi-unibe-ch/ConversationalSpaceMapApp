@@ -1,7 +1,7 @@
 import unittest
 import matplotlib
 
-matplotlib.use('Agg')
+matplotlib.use("Agg")
 
 import conversationalspacemapapp.App.TogaApp.app as TogaApp
 import conversationalspacemapapp.App.AbstractApp as AbstractApp
