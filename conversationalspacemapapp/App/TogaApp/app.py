@@ -241,12 +241,15 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         )
 
         for i in range(8):
-            button = self._set_widget_style(toga.Button(
-                "   ",
-                id=participant + "_color" + str(i),
-                style=Pack(background_color=self.color_palette.value.value[i]),
-                on_press=lambda e: self._set_participant_color(color, e),
-            ),flex=0)
+            button = self._set_widget_style(
+                toga.Button(
+                    "   ",
+                    id=participant + "_color" + str(i),
+                    style=Pack(background_color=self.color_palette.value.value[i]),
+                    on_press=lambda e: self._set_participant_color(color, e),
+                ),
+                flex=0,
+            )
             widget_container.add(button)
 
         return widget_container
@@ -255,16 +258,14 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         assert self.has_parser
         for participant in self.parser.participants:
             for i in range(8):
-                color_button = self._get_widget_by_id(
-                    participant + "_color" + str(i)
-                )
+                color_button = self._get_widget_by_id(participant + "_color" + str(i))
                 color_button.style.background_color = self.color_palette.value.value[i]
 
     def _set_participant_color(self, color_widget: toga.Widget, index) -> None:
         color_widget.value = StylePicker.ColorPicker.rgb2hex(
             index.style.background_color.r,
             index.style.background_color.g,
-            index.style.background_color.b
+            index.style.background_color.b,
         )
 
     def draw_chart(self, chart, figure, *args, **kwargs):
