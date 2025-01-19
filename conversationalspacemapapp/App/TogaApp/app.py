@@ -354,8 +354,8 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         assert self.has_path
         self.plot_title_input.value = "Conversational Space Map " + str(self.path.stem)
 
-    async def _update_plot(self):
-        await self.chart.redraw()
+    def _update_plot(self):
+        self.chart.redraw()
         self.save.enabled = True
 
     def _is_new_history_path(self) -> bool:

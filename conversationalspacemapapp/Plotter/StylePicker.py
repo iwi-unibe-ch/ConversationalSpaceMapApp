@@ -1,4 +1,3 @@
-import colormap
 from enum import Enum
 import matplotlib as mpl
 import matplotlib.colors as mcolors
@@ -9,7 +8,7 @@ class ColorPicker:
 
     @staticmethod
     def rgb2hex(r, g, b):
-        return colormap.rgb2hex(r, g, b)
+        return '#' + ''.join(f'{i:02X}' for i in (r,g,b))
 
     @staticmethod
     def pastel():
