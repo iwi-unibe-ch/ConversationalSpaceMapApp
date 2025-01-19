@@ -1,3 +1,4 @@
+import colormap
 from enum import Enum
 import matplotlib as mpl
 import matplotlib.colors as mcolors
@@ -6,9 +7,9 @@ import matplotlib.colors as mcolors
 class ColorPicker:
     COLORS = mcolors.CSS4_COLORS
 
-    # @staticmethod
-    # def csm():
-    #      return ["salmon", "gold", "lawngreen", "turquoise", "thistle"]
+    @staticmethod
+    def rgb2hex(r, g, b):
+        return colormap.rgb2hex(r, g, b)
 
     @staticmethod
     def pastel():

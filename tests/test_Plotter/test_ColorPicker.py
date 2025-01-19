@@ -1,6 +1,6 @@
 import unittest
 
-import conversationalspacemapapp.Plotter.ColorPicker as ColorPicker
+import conversationalspacemapapp.Plotter.StylePicker as ColorPicker
 
 
 class TestColorPicker(unittest.TestCase):

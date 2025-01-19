@@ -11,7 +11,7 @@ matplotlib.use("Agg")
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
-import conversationalspacemapapp.Plotter.ColorPicker as ColorPicker
+import conversationalspacemapapp.Plotter.StylePicker as ColorPicker
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 

@@ -21,8 +21,10 @@ class MapBarPlot:
     def plot(
         self,
         title="Conversational Map Space",
-        grid=True,
         labels=True,
+        interviewer_label="Interviewer",
+        interviewee_label="Interviewee",
+        grid=True,
         legend=True,
     ):
         xlim_num = 0
@@ -56,13 +58,13 @@ class MapBarPlot:
             self.ax.text(
                 xlim_num / 2,
                 -1,
-                "Participant's words per utterance",
+                interviewee_label + "'s words per utterance",
                 horizontalalignment="center",
             )
             self.ax.text(
                 -xlim_num / 2,
                 -1,
-                "Interviewer's words per utterance",
+                interviewer_label + "'s words per utterance",
                 horizontalalignment="center",
             )
         if legend:
