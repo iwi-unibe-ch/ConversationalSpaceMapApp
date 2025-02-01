@@ -1,17 +1,14 @@
 import unittest
-from mockito import when
-from unittest.mock import MagicMock
-
-import toga
 import matplotlib
 import matplotlib.pyplot as plt
 
 matplotlib.use("Agg")
 
+import utilities
+
 import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
-import conversationalspacemapapp.Types.Constants as Constants
-import conversationalspacemapapp.Plotter.StylePicker as ColorPicker
+import conversationalspacemapapp.App.AbstractApp as AbstractApp
 import conversationalspacemapapp.Parser.TimestampParser as TranscriptParser
 
 
@@ -19,43 +16,30 @@ class TestPlotMap(unittest.TestCase):
     parser: TranscriptParser.AbstractParser
     fig: plt.figure()
     ax: plt.Axes
-    app: toga.App
+    app: AbstractApp.AbstractApp
 
     def setUp(self):
-        TestPlotMap.parser = MagicMock()
-        TestPlotMap.parser.map = [
-            Data.Utterance(number=1, speaker="SPEAKER_00", words=10),
-            Data.Utterance(number=2, speaker="SPEAKER_01", words=15),
-        ]
-        TestPlotMap.app = MagicMock()
-        when(TestPlotMap.app)._get_participant_role("SPEAKER_00").thenReturn(
-            Constants.Participant.Interviewer
-        )
-        when(TestPlotMap.app)._get_participant_role("SPEAKER_01").thenReturn(
-            Constants.Participant.Interviewee
-        )
-        when(TestPlotMap.app)._get_participant_color("SPEAKER_00").thenReturn(
-            ColorPicker.ColorPicker.pastel()[0]
-        )
-        when(TestPlotMap.app)._get_participant_color("SPEAKER_01").thenReturn(
-            ColorPicker.ColorPicker.pastel()[1]
-        )
-        when(TestPlotMap.app)._get_participant_name("SPEAKER_00").thenReturn(
-            ColorPicker.ColorPicker.pastel()[0]
-        )
-        when(TestPlotMap.app)._get_participant_name("SPEAKER_01").thenReturn(
-            ColorPicker.ColorPicker.pastel()[1]
-        )
+        TestPlotMap.parser = utilities.get_parser_mock()
+        TestPlotMap.app = utilities.get_app_mock(parser=TestPlotMap.parser)
         TestPlotMap.fig, TestPlotMap.ax = plt.subplots()
 
     def tearDown(self):
         TestPlotMap.fig.show()
 
     def test_bar_plot(self):
-        plotter = PlotMap.MapBarPlot(
-            parser=TestPlotMap.parser,
+        sut = PlotMap.MapBarPlot(
             fig=TestPlotMap.fig,
-            app=TestPlotMap.app,
         )
-        self.assertEqual(TestPlotMap.parser.map[0].words, 10)
-        plotter.plot("I01")
+        sut.plot(Data.PlotOptions(app=TestPlotMap.app))
+
+    def test_bar_plot_no_axes(self):
+        sut = PlotMap.MapBarPlot(
+            fig=TestPlotMap.fig,
+        )
+        sut.plot(
+            Data.PlotOptions(
+                app=TestPlotMap.app,
+                xaxis=False,
+                yaxis=False,
+            )
+        )

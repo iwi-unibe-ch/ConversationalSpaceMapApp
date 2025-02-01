@@ -7,6 +7,7 @@ import pathlib
 import platform
 from typing import Callable
 
+import conversationalspacemapapp.Types.Data as Data
 import conversationalspacemapapp.Plotter.PlotMap as PlotMap
 import conversationalspacemapapp.Types.Constants as Constants
 import conversationalspacemapapp.App.AbstractApp as AbstractApp
@@ -282,19 +283,20 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
     def draw_chart(self, chart: toga_chart.Chart, figure, *args, **kwargs):
         if self.has_parser:
-            self.map = PlotMap.MapBarPlot(
-                parser=self.parser, fig=figure, app=self
-            )
+            self.map = PlotMap.MapBarPlot(fig=figure)
             self.map.plot(
-                title=self.plot_title_input.value,
-                show_title=self.plot_title.value,
-                labels=self.plot_labels.value,
-                interviewer_label=self.interviewer_label_input.value,
-                interviewee_label=self.interviewee_label_input.value,
-                yaxis=self.plot_yaxis.value,
-                xaxis=self.plot_xaxis.value,
-                legend=self.plot_legend.value,
-                grid=self.plot_grid.value,
+                options=Data.PlotOptions(
+                    app=self,
+                    title=self.plot_title_input.value,
+                    show_title=self.plot_title.value,
+                    labels=self.plot_labels.value,
+                    interviewer_label=self.interviewer_label_input.value,
+                    interviewee_label=self.interviewee_label_input.value,
+                    yaxis=self.plot_yaxis.value,
+                    xaxis=self.plot_xaxis.value,
+                    legend=self.plot_legend.value,
+                    grid=self.plot_grid.value,
+                ),
             )
             figure.tight_layout()
         else:
