@@ -9,21 +9,23 @@ class MapBarPlot:
         self,
         parser: TranscriptParser.AbstractParser,
         fig: plt.figure,
-        ax: plt.Axes,
         app: AbstractApp.AbstractApp,
     ):
         self.participants = parser.participants
         self.map = parser.map
-        self.ax = ax
         self.fig = fig
+        self.ax = self.fig.gca()
         self.app = app
 
     def plot(
         self,
         title="Conversational Map Space",
+        show_title=True,
         labels=True,
         interviewer_label="Interviewer",
         interviewee_label="Interviewee",
+        yaxis=True,
+        xaxis=True,
         grid=True,
         legend=True,
     ):
@@ -43,6 +45,11 @@ class MapBarPlot:
 
         # Set x-axis
         self.ax.set_xlim([-xlim_num, xlim_num])
+        if not xaxis:
+            self.ax.set(xticklabels=[])
+            self.ax.tick_params(bottom=False)
+
+        # Set grid
         if grid:
             self.ax.xaxis.grid(
                 True, linestyle="--", which="major", color="grey", alpha=0.25
@@ -50,10 +57,16 @@ class MapBarPlot:
 
         # Set y-axis
         self.ax.set_ylim([-2, max(index) + 2])
-        self.ax.set_yticks(index)
+        if yaxis:
+            self.ax.set_yticks(index)
+            self.ax.set_ylabel("Utterance (bottom = start of interview)")
+        else:
+            self.ax.set(yticklabels=[])
+            self.ax.tick_params(left=False)
 
         # Set plot labels
-        self.ax.set_title(title)
+        if show_title:
+            self.ax.set_title(title)
         if labels:
             self.ax.text(
                 xlim_num / 2,
@@ -70,9 +83,6 @@ class MapBarPlot:
         if legend:
             self.ax.legend(loc="upper left")
             self.remove_duplicate_labels_legend()
-
-        self.ax.set_ylabel("Utterance (bottom = start of interview)")
-        self.fig.tight_layout()
 
     def remove_duplicate_labels_legend(self):
         handles, labels = self.ax.get_legend_handles_labels()

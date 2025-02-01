@@ -137,6 +137,9 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
                 on_change=self._set_participants_color_selection,
             ),
         )
+        self.plot_title = self._set_widget_style(
+            toga.Switch(text="Title", on_change=self.plot_handler, value=True), flex=0
+        )
         self.plot_title_input = self._set_widget_style(
             toga.TextInput(placeholder="Title"), flex=2
         )
@@ -160,15 +163,24 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         self.plot_labels = self._set_widget_style(
             toga.Switch(text="Labels", on_change=self.plot_handler, value=True), flex=0
         )
+        self.plot_yaxis = self._set_widget_style(
+            toga.Switch(text="Y-Axis", on_change=self.plot_handler, value=True), flex=0
+        )
+        self.plot_xaxis = self._set_widget_style(
+            toga.Switch(text="X-Axis", on_change=self.plot_handler, value=True), flex=0
+        )
         self.plot_grid = self._set_widget_style(
             toga.Switch(text="Grid", on_change=self.plot_handler, value=True), flex=0
         )
         self._general_participants_layout = toga.Box(
             children=[
                 self.plot_title_input,
+                self.plot_title,
                 self.plot_labels,
                 self.interviewer_label_input,
                 self.interviewee_label_input,
+                self.plot_yaxis,
+                self.plot_xaxis,
                 self.plot_legend,
                 self.plot_grid,
                 self.color_palette,
@@ -268,20 +280,19 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
             index.style.background_color.b,
         )
 
-    def draw_chart(self, chart, figure, *args, **kwargs):
+    def draw_chart(self, chart: toga_chart.Chart, figure, *args, **kwargs):
         if self.has_parser:
-            figure.clf()
-            # Add a subplot that is a histogram of the data, using the normal matplotlib API
-            ax = figure.add_subplot(1, 1, 1)
-
             self.map = PlotMap.MapBarPlot(
-                parser=self.parser, ax=ax, fig=figure, app=self
+                parser=self.parser, fig=figure, app=self
             )
             self.map.plot(
                 title=self.plot_title_input.value,
+                show_title=self.plot_title.value,
                 labels=self.plot_labels.value,
                 interviewer_label=self.interviewer_label_input.value,
                 interviewee_label=self.interviewee_label_input.value,
+                yaxis=self.plot_yaxis.value,
+                xaxis=self.plot_xaxis.value,
                 legend=self.plot_legend.value,
                 grid=self.plot_grid.value,
             )

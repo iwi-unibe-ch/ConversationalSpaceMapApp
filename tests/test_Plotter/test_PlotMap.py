@@ -54,7 +54,6 @@ class TestPlotMap(unittest.TestCase):
     def test_bar_plot(self):
         plotter = PlotMap.MapBarPlot(
             parser=TestPlotMap.parser,
-            ax=TestPlotMap.ax,
             fig=TestPlotMap.fig,
             app=TestPlotMap.app,
         )
