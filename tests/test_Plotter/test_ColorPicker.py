@@ -4,8 +4,8 @@ import conversationalspacemapapp.Plotter.StylePicker as ColorPicker
 
 
 class TestColorPicker(unittest.TestCase):
-    def abstract_test(self, palette, palette_str, pallette_list):
-        self.assertEqual(palette.value, pallette_list)
+    def abstract_test(self, palette, palette_str, palette_list):
+        self.assertEqual(palette.value, palette_list)
         self.assertEqual(str(palette), palette_str)
 
     def test_accent(self):

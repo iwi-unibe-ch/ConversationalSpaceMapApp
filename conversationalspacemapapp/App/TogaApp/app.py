@@ -18,8 +18,10 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
     default_padding = 5
     default_flex = 1
 
-    def __init__(self, name, id):
-        super(ConversationalSpaceMapAppToga, self).__init__(formal_name=name, app_id=id)
+    def __init__(self, name, app_id):
+        super(ConversationalSpaceMapAppToga, self).__init__(
+            formal_name=name, app_id=app_id
+        )
 
     @property
     def path(self) -> pathlib.Path | None:
@@ -47,10 +49,10 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
         self.main_window.show()
 
     def _create_tab_menu(self, tabs):
-        main = toga.OptionContainer(content=tabs)
-        self._set_widget_style(main)
-        self._set_transparent_background(main)
-        return main
+        main_tab = toga.OptionContainer(content=tabs)
+        self._set_widget_style(main_tab)
+        self._set_transparent_background(main_tab)
+        return main_tab
 
     def _create_about_layout(self):
         # Create app description page
@@ -267,14 +269,15 @@ class ConversationalSpaceMapAppToga(AbstractApp.AbstractApp, toga.App):
 
         return widget_container
 
-    def _set_participants_color_selection(self, e):
+    def _set_participants_color_selection(self, widget):
         assert self.has_parser
         for participant in self.parser.participants:
             for i in range(8):
                 color_button = self._get_widget_by_id(participant + "_color" + str(i))
                 color_button.style.background_color = self.color_palette.value.value[i]
 
-    def _set_participant_color(self, color_widget: toga.Widget, index) -> None:
+    @staticmethod
+    def _set_participant_color(color_widget: toga.Widget, index) -> None:
         color_widget.value = StylePicker.ColorPicker.rgb2hex(
             index.style.background_color.r,
             index.style.background_color.g,

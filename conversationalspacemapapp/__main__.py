@@ -1,9 +1,9 @@
-import conversationalspacemapapp.App.TogaApp.app as togaApp
+import conversationalspacemapapp.App.TogaApp.app as TogaApp
 
 
 def main(toga=True):
     if toga:
-        togaApp.main().main_loop()
+        TogaApp.main().main_loop()
     else:
         NotImplemented("No other GUI implementation available.")
 

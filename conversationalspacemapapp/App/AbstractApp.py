@@ -119,7 +119,7 @@ class AbstractApp(metaclass=abc.ABCMeta):
     ):
         raise NotImplementedError
 
-    @abc.abstractmethod
+    @staticmethod
     def _set_transparent_background(self):
         raise NotImplementedError
 
