@@ -55,6 +55,6 @@ Note: You will get a warning while installing the app because it is not signed w
 
 References
 ============================
-**Haberl, Armin, Jürgen Fleiss, Dominik Kowald and Stefan Thalmann**, Take the aTrain. Introducing an interface for the accessible transcription of interviews *Journal of Behavioral and Experimental Finance 41, 2024, DOI: 10.1016/j.jbef.2024.100891.
+**Haberl, Armin, Jürgen Fleiss, Dominik Kowald and Stefan Thalmann**, Take the aTrain. Introducing an interface for the accessible transcription of interviews *Journal of Behavioral and Experimental Finance* 41, 2024, DOI: 10.1016/j.jbef.2024.100891.
 
 **Saunders, Mark, Philip Lewis, and Adrian Thornhill**, *Research methods for business students*, 9 ed., Harlow, England: Pearson, 2023.
