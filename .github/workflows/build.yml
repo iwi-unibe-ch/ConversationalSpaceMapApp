@@ -42,6 +42,14 @@ jobs:
             briefcase-run-prefix: "xvfb-run"
             briefcase-args: "--target ubuntu:24.04"
 
+          - target: "Ubuntu-24.04-ARM"
+            platform: "Linux"
+            output-format: "system"
+            runs-on: "ubuntu-latest"
+            pre-command: "sudo apt -y install socat"
+            briefcase-run-prefix: "xvfb-run"
+            briefcase-args: "--target ubuntu:24.04-arm"
+
           - target: "Fedora-40"
             platform: "Linux"
             output-format: "system"
